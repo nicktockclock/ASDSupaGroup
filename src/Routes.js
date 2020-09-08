@@ -18,7 +18,7 @@ export default function Routes() {
         <Login />
       </Route>
       <Route exact path="/recipepage">
-        <RecipePage />
+        <RecipePage/>
       </Route>
     </Switch>
   );}

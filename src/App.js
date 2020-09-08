@@ -32,7 +32,6 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
   <Routes />
-
     </div>
   );
 }
