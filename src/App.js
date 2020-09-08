@@ -5,6 +5,7 @@ import Routes from "./Routes";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import "./App.css";
+import "./containers/RecipePage.js";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           <Nav pullRight>
             <LinkContainer to="/signup">
               <NavItem>Signup</NavItem>
+            </LinkContainer>
+            <LinkContainer to="/recipepage">
+              <NavItem>Recipe Page</NavItem>
             </LinkContainer>
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
