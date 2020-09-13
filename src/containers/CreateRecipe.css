@@ -1,0 +1,16 @@
+@media all and (min-width: 480px) {
+    .Create {
+      padding: 90px 0;
+    }
+  
+    .Create form {
+      margin: 0 auto;
+      max-width: 330px;
+    }
+  }
+  
+  .Create form span.help-block {
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #999;
+  }

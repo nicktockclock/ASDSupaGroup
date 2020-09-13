@@ -28,6 +28,9 @@ function App() {
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
             </LinkContainer>
+            <LinkContainer to="/createrecipe">
+              <NavItem>Create Recipe</NavItem>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

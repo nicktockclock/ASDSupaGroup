@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/fbrennanbohm/Uni/ASD/ASDSupaGroup/RecipeApi/RecipeApi.csproj": {}
+    "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj": {}
   },
   "projects": {
-    "/Users/fbrennanbohm/Uni/ASD/ASDSupaGroup/RecipeApi/RecipeApi.csproj": {
+    "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/fbrennanbohm/Uni/ASD/ASDSupaGroup/RecipeApi/RecipeApi.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj",
         "projectName": "RecipeApi",
-        "projectPath": "/Users/fbrennanbohm/Uni/ASD/ASDSupaGroup/RecipeApi/RecipeApi.csproj",
-        "packagesPath": "/Users/fbrennanbohm/.nuget/packages/",
-        "outputPath": "/Users/fbrennanbohm/Uni/ASD/ASDSupaGroup/RecipeApi/obj/",
+        "projectPath": "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/fbrennanbohm/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -36,9 +36,17 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNet.WebApi.Cors": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
-              "version": "[*, )"
+              "version": "[3.1.7, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[2.11.2, )"
             }
           },
           "imports": [
@@ -59,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.301/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
