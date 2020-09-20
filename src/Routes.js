@@ -5,6 +5,8 @@ import Home from "./containers/Home";
 import Login from "./containers/Login";
 import RecipePage from "./containers/RecipePage";
 import CreateRecipe from "./containers/CreateRecipe";
+import MyRecipes from "./containers/MyRecipes";
+import UpdateRecipe from "./containers/UpdateRecipe";
 
 export default function Routes() {
   return (
@@ -23,6 +25,12 @@ export default function Routes() {
       </Route>
       <Route exact path="/createrecipe">
         <CreateRecipe/>
+      </Route>
+      <Route exact path="/myrecipes">
+        <MyRecipes/>
+      </Route>
+      <Route exact path="/updaterecipe">
+        <UpdateRecipe/>
       </Route>
     </Switch>
   );}

@@ -14,3 +14,17 @@
     padding-bottom: 10px;
     color: #999;
   }
+
+  .navbar-brand,
+a:not([href]):not([tabindex]) {
+  color: white
+}
+
+.wrapper {
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.wrapper-recipe {
+  margin-top: 30px;
+}

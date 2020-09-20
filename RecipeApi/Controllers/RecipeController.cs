@@ -37,7 +37,6 @@ namespace RecipeApi.Controllers
         [HttpPost]
         public ActionResult<Recipe> Create(Recipe recipe)
         {
-            Debug.WriteLine("HELLO" + recipe.calories);
             _recipeService.Create(recipe);
 
             return CreatedAtRoute("GetRecipe", new { id = recipe.Id.ToString() }, recipe);
