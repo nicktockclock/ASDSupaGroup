@@ -29,9 +29,7 @@ export default function Routes() {
       <Route exact path="/myrecipes">
         <MyRecipes/>
       </Route>
-      <Route exact path="/updaterecipe">
-        <UpdateRecipe/>
-      </Route>
+      <Route path="/myrecipes/updaterecipe" render={props => <UpdateRecipe {...props} className="MyRecipes" app={this}/>}/>
     </Switch>
   );}
 

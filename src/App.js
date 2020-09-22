@@ -2,10 +2,12 @@ import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from "./libs/contextLib";
 import React from "react";
 import Routes from "./Routes";
+import { Route, Switch } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import "./App.css";
 import "./containers/RecipePage.js";
+import UpdateRecipe from "./containers/UpdateRecipe";
 
 function App() {
   return (
@@ -34,7 +36,8 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-  <Routes />
+  <Routes>
+  </Routes>
     </div>
   );
 }
