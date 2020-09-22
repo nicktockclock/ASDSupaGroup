@@ -10,6 +10,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using RecipeApi.Models;
+using RecipeApi.Services;
+using System.Diagnostics;
 
 namespace RecipeApi
 {
@@ -19,13 +23,31 @@ namespace RecipeApi
         {
             Configuration = configuration;
         }
-
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+                {
+                    options.AddPolicy(MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();;
+                    });
+                });
+            // requires using Microsoft.Extensions.Options
+            services.Configure<RecipeDatabaseSettings>(
+                Configuration.GetSection(nameof(RecipeDatabaseSettings)));
+
+            services.AddSingleton<IRecipeDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<RecipeDatabaseSettings>>().Value);
+
+            services.AddSingleton<RecipeService>();
+
             services.AddControllers();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,11 +58,16 @@ namespace RecipeApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(MyAllowSpecificOrigins); 
 
             app.UseEndpoints(endpoints =>
             {

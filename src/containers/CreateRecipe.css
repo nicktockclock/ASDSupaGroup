@@ -1,0 +1,30 @@
+@media all and (min-width: 480px) {
+    .Create {
+      padding: 90px 0;
+    }
+  
+    .Create form {
+      margin: 0 auto;
+      max-width: 330px;
+    }
+  }
+  
+  .Create form span.help-block {
+    font-size: 14px;
+    padding-bottom: 10px;
+    color: #999;
+  }
+
+  .navbar-brand,
+a:not([href]):not([tabindex]) {
+  color: white
+}
+
+.wrapper {
+  max-width: 500px;
+  margin: 50px auto;
+}
+
+.wrapper-recipe {
+  margin-top: 30px;
+}
