@@ -8,7 +8,7 @@ class ListRecipes extends Component {
         super(props);
 
         this.state = {
-            foods: ["burger", "pizza"],
+            foods: ["burger", "pizza", "salad", "spaghetti bolognese", "steak", "chicken schnitzel", "risotto", "lasagne"],
             imgURLs: [],
         };
     }
@@ -34,11 +34,14 @@ class ListRecipes extends Component {
                         {console.log("length:" + this.state.imgURLs.length)}
 
                         {this.state.imgURLs.map((value, index) => {
-                            return (<div background-color="blue">
-                                    <h1>{this.state.foods[index]}</h1>
+                            return (
+                            <div class="gallery">
+                                <a target="_blank" href="{value}">
+                                    <p class="name">{this.state.foods[index]}</p>
                                     <img src={value} width="300"/>
-                                    <p>See more</p>
-                                    </div>)
+                                    <div class="desc">See more</div>
+                                </a>                                
+                            </div>)
                         })}
                         
                     </div>
