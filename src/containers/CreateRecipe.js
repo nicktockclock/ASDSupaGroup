@@ -71,7 +71,7 @@ class CreateRecipe extends Component {
             description: this.state.description,
             instructions: this.state.instructions,
             ingredients: this.state.ingredients,
-            cooktime: this.state.cooktime,
+            cookTime: this.state.cooktime,
             servings: parseInt(this.state.servings),
             difficulty: this.state.difficulty,
             calories: parseInt(this.state.calories)
@@ -95,52 +95,52 @@ class CreateRecipe extends Component {
 
     render() {
         return (
-            <div className = "Create">
+            <div className = "wrapper-recipe">
                 <Form horizontal onSubmit={this.onSubmit}>
                     <FormGroup controlId="formHorizontalName" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Recipe Name</Col>
+                        <Col componentClass={ControlLabel} sm={2}>Recipe Name</Col>
                         <Col sm={10}>
                             <FormControl type="text" placeholder="Name" value={this.state.name} onChange={this.onChangeRecipeName}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalDescription" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Description</Col>
+                        <Col componentClass={ControlLabel} sm={2}>Description</Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="Description" value={this.state.description} onChange={this.onChangeRecipeDescription}/>
+                            <FormControl componentClass="textarea" placeholder="Description" value={this.state.description} onChange={this.onChangeRecipeDescription}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalInstructions" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Instructions</Col>
+                        <Col componentClass={ControlLabel} sm={2}>Instructions</Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="Instructions" value={this.state.instructions} onChange={this.onChangeRecipeInstructions}/>
+                            <FormControl componentClass="textarea" placeholder="Instructions" value={this.state.instructions} onChange={this.onChangeRecipeInstructions}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalIngredients" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Ingredients</Col>
+                        <Col componentClass={ControlLabel} sm={2}>Ingredients</Col>
                         <Col sm={10}>
-                            <FormControl type="text" placeholder="Ingredients" value={this.state.ingredients} onChange={this.onChangeRecipeIngredients}/>
+                            <FormControl componentClass="textarea" placeholder="Ingredients" value={this.state.ingredients} onChange={this.onChangeRecipeIngredients}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalCookTime" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={10}>Time to Cook</Col>
+                        <Col componentClass={ControlLabel} sm={2}>Time to Cook</Col>
                         <Col sm={10}>
                             <FormControl type="text" placeholder="CookTime" value={this.state.cooktime} onChange={this.onChangeRecipeCookTime}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalServings" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={10}>How many Servings</Col>
+                        <Col componentClass={ControlLabel} sm={2}>How many Servings</Col>
                         <Col sm={10}>
                             <FormControl type="number" placeholder="Servings" value={this.state.servings} onChange={this.onChangeRecipeServings}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalDifficulty" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Difficulty</Col>
+                        <Col componentClass={ControlLabel} sm={2}>Difficulty</Col>
                         <Col sm={10}>
                             <FormControl componentClass="select" as="select" placeholder="Difficulty" value={this.state.difficulty} onChange={this.onChangeRecipeDifficulty}>
                                 <option value="Easy">Easy</option>
@@ -151,7 +151,7 @@ class CreateRecipe extends Component {
                     </FormGroup>
 
                     <FormGroup controlId="formHorizontalCalories" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Calories (kCal)</Col>
+                        <Col componentClass={ControlLabel} sm={2}>Calories (kCal)</Col>
                         <Col sm={10}>
                             <FormControl type="number" placeholder="Calories" value={this.state.calories} onChange={this.onChangeRecipeCalories}/>
                         </Col>

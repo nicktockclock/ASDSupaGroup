@@ -29,7 +29,7 @@ class ViewTable extends Component {
                     {this.props.obj.ingredients}
                 </td>
                 <td>
-                    {this.props.obj.cooktime}
+                    {this.props.obj.cookTime}
                 </td>
                 <td>
                     {this.props.obj.servings}

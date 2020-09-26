@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, FormControl, Col, Checkbox, ControlLabel } fro
 import "./CreateRecipe.css";
 import Routes from "../Routes";
 import axios from 'axios';
-import ViewTable from './view-table';
+import {Link, Redirect} from 'react-router-dom';
 
 class UpdateRecipe extends Component {
     constructor(props) {
@@ -26,7 +26,8 @@ class UpdateRecipe extends Component {
             cooktime: '',
             servings: 0,
             difficulty: 'Easy',
-            calories: 0
+            calories: 0,
+            updated: false
         }   
     }
 
@@ -72,14 +73,15 @@ class UpdateRecipe extends Component {
             description: this.state.description,
             instructions: this.state.instructions,
             ingredients: this.state.ingredients,
-            cooktime: this.state.cooktime,
+            cookTime: this.state.cooktime,
             servings: parseInt(this.state.servings),
             difficulty: this.state.difficulty,
             calories: parseInt(this.state.calories)
         };
-        axios.post('http://localhost:5000/api/recipes', recipeObject)
+        axios.put('http://localhost:5000/api/recipes/'+this.state.id, recipeObject)
             .then((res) => {
                 console.log(res.data)
+                this.setState({updated: true});
             }).catch((error) => {
                 console.log(error)
             });
@@ -89,15 +91,14 @@ class UpdateRecipe extends Component {
         axios.get('http://localhost:5000/api/recipes/'+this.state.id)
             .then(res => {
                 this.setState({ recipeCollection: res.data });
-                this.setState({ name: this.state.recipeCollection.recipeName })
-                this.state.name = this.state.recipeCollection.recipeName;
-                this.state.description = this.state.recipeCollection.description;
-                this.state.instructions = this.state.recipeCollection.instructions;
-                this.state.ingredients = this.state.recipeCollection.ingredients;
-                this.state.cooktime = this.state.recipeCollection.cooktime;
-                this.state.servings = this.state.recipeCollection.servings;
-                this.state.difficulty = this.state.recipeCollection.difficulty;
-                this.state.calories = this.state.recipeCollection.calories;
+                this.setState({ name: this.state.recipeCollection.recipeName });
+                this.setState({ description: this.state.recipeCollection.description });
+                this.setState({ instructions: this.state.recipeCollection.instructions });
+                this.setState({ ingredients: this.state.recipeCollection.ingredients });
+                this.setState({ cooktime: this.state.recipeCollection.cookTime });
+                this.setState({ servings: this.state.recipeCollection.servings });
+                this.setState({ difficulty: this.state.recipeCollection.difficulty });
+                this.setState({ calories: this.state.recipeCollection.calories });
                 
             })
             .catch(function (error) {
@@ -105,85 +106,90 @@ class UpdateRecipe extends Component {
             })
     }
 
-    viewTable() {
-        return this.state.recipeCollection.map((data, i) => {
-            return <ViewTable obj={data} key={i} />;
-        });
-    }
-
     render() {
-        console.log(this.state.name);
-        return (
-            <div className="wrapper-recipe">
-                <Form horizontal onSubmit={this.onSubmit}>
-                    <FormGroup controlId="formHorizontalName" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Recipe Name</Col>
-                        <Col sm={10}>
-                            <FormControl type="textarea" placeholder={this.state.name} value={this.state.name} onChange={this.onChangeRecipeName}/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalDescription" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Description</Col>
-                        <Col sm={10}>
-                            <FormControl type="text" placeholder="Description" value={this.state.description} onChange={this.onChangeRecipeDescription}/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalInstructions" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Instructions</Col>
-                        <Col sm={10}>
-                            <FormControl type="text" placeholder="Instructions" value={this.state.instructions} onChange={this.onChangeRecipeInstructions}/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalIngredients" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Ingredients</Col>
-                        <Col sm={10}>
-                            <FormControl type="text" placeholder="Ingredients" value={this.state.ingredients} onChange={this.onChangeRecipeIngredients}/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalCookTime" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={10}>Time to Cook</Col>
-                        <Col sm={10}>
-                            <FormControl type="text" placeholder="CookTime" value={this.state.cooktime} onChange={this.onChangeRecipeCookTime}/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalServings" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={10}>How many Servings</Col>
-                        <Col sm={10}>
-                            <FormControl type="number" placeholder="Servings" value={this.state.servings} onChange={this.onChangeRecipeServings}/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalDifficulty" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Difficulty</Col>
-                        <Col sm={10}>
-                            <FormControl componentClass="select" as="select" placeholder="Difficulty" value={this.state.difficulty} onChange={this.onChangeRecipeDifficulty}>
-                                <option value="Easy">Easy</option>
-                                <option value="Moderate">Moderate</option>
-                                <option value="Hard">Hard</option>
-                            </FormControl>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup controlId="formHorizontalCalories" bsSize='large'>
-                        <Col componentClass={ControlLabel} sm={3}>Calories (kCal)</Col>
-                        <Col sm={10}>
-                            <FormControl type="number" placeholder="Calories" value={this.state.calories} onChange={this.onChangeRecipeCalories}/>
-                        </Col>
-                    </FormGroup>
-
-                    <FormGroup>
-                        <Col smOffset={2} sm={10}>
-                            <Button type="submit" bsSize='large'>Add Recipe</Button>
-                        </Col>
-                    </FormGroup>
-                </Form>
-            </div>
-        )
+        if (this.state.updated){
+            return <Redirect to = {{ pathname: "/myrecipes" }} />;
+        }
+        else{
+            return (
+                <div className="wrapper-recipe">
+                    <Form horizontal onSubmit={this.onSubmit}>
+                        <FormGroup controlId="formHorizontalName" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>Recipe Name</Col>
+                            <Col sm={10}>
+                                <FormControl type="text" placeholder={this.state.name} value={this.state.name} onChange={this.onChangeRecipeName}/>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup controlId="formHorizontalDescription" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>Description</Col>
+                            <Col sm={10}>
+                                <FormControl componentClass="textarea" placeholder="Description" value={this.state.description} onChange={this.onChangeRecipeDescription}/>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup controlId="formHorizontalInstructions" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>Instructions</Col>
+                            <Col sm={10}>
+                                <FormControl componentClass="textarea" placeholder="Instructions" value={this.state.instructions} onChange={this.onChangeRecipeInstructions}/>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup controlId="formHorizontalIngredients" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>Ingredients</Col>
+                            <Col sm={10}>
+                                <FormControl componentClass="textarea" placeholder="Ingredients" value={this.state.ingredients} onChange={this.onChangeRecipeIngredients}/>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup controlId="formHorizontalCookTime" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>Time to Cook</Col>
+                            <Col sm={10}>
+                                <FormControl type="text" placeholder="CookTime" value={this.state.cooktime} onChange={this.onChangeRecipeCookTime}/>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup controlId="formHorizontalServings" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>How many Servings</Col>
+                            <Col sm={10}>
+                                <FormControl type="number" placeholder="Servings" value={this.state.servings} onChange={this.onChangeRecipeServings}/>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup controlId="formHorizontalDifficulty" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>Difficulty</Col>
+                            <Col sm={10}>
+                                <FormControl componentClass="select" as="select" placeholder="Difficulty" value={this.state.difficulty} onChange={this.onChangeRecipeDifficulty}>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Moderate">Moderate</option>
+                                    <option value="Hard">Hard</option>
+                                </FormControl>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup controlId="formHorizontalCalories" bsSize='large'>
+                            <Col componentClass={ControlLabel} sm={2}>Calories (kCal)</Col>
+                            <Col sm={10}>
+                                <FormControl type="number" placeholder="Calories" value={this.state.calories} onChange={this.onChangeRecipeCalories}/>
+                            </Col>
+                        </FormGroup>
+    
+                        <FormGroup>
+                            <Col smOffset={2} sm={10}>
+                                <Button type="submit" bsSize='large'>Update Recipe</Button>
+                            
+                                <Link
+                                    to={{
+                                        pathname: "/myrecipes",
+                                    }}
+                                >Cancel</Link>
+                            </Col>
+                        </FormGroup>
+                    </Form>
+                </div>
+            )
+        }
+        
     }
 }
 export default UpdateRecipe;
