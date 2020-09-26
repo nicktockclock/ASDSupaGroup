@@ -1,5 +1,9 @@
 import { findAllInRenderedTree } from "react-dom/test-utils";
 
+function random(max) {  //between 0 and max
+    return Math.floor(Math.random() * Math.floor(max)); 
+} 
+
 const getJSON = async url => {
     try {
         const response = await fetch(url);
@@ -42,3 +46,25 @@ export async function getImage(query) {
     return return_string;
 }
 
+export const ratingChanged = (newRating) => {
+    console.log(newRating);
+};
+
+export function getRandomRating() {
+    return Math.floor(Math.random() * 2) + 3 //between 3-5 stars
+}
+
+export function getRandomDifficulty() {
+    let array = ["Easy", "Medium", "Hard"];
+    let index = random(array.length - 1);
+    return array[index];
+}
+
+export function getRandomDuration() {
+    let array = ["30 mins", "45 mins", "60 mins", "90 mins", "120 mins"];
+    let index = random(array.length - 1);
+    console.log("here");
+    console.log(index);
+    console.log(array[index]);
+    return array[index];
+}

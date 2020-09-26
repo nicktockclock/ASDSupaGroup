@@ -1,6 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
+import ReactStars from "react-rating-stars-component";
 import "./ListRecipes.css";
-import {getImage} from "./Webscrape.js";
+import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratingChanged} from "./Utils.js";
 
 class ListRecipes extends Component {
 
@@ -8,7 +9,7 @@ class ListRecipes extends Component {
         super(props);
 
         this.state = {
-            foods: ["burger", "pizza", "salad", "spaghetti bolognese", "steak", "chicken schnitzel", "risotto", "lasagne"],
+            foods: ["burger", "pizza", "salad", "Bolognese", "steak", "chicken schnitzel", "risotto", "lasagne", "curry", "salad", "panna cotta", "sushi", "toasted sandwich", "creme brulee"],
             imgURLs: [],
         };
     }
@@ -35,14 +36,30 @@ class ListRecipes extends Component {
 
                         {this.state.imgURLs.map((value, index) => {
                             return (
-                            <div class="gallery">
-                                <a target="_blank" href="{value}">
-                                    <p class="name">{this.state.foods[index]}</p>
-                                    <img src={value} width="300"/>
-                                    <div class="desc">See more</div>
-                                </a>                                
-                            </div>)
-                        })}
+                                <div class="gallery">
+                                    <a target="_blank" href="{value}">
+                                        <p class="name">{this.state.foods[index]}</p>
+                                        <img src={value} width="300"/>
+                                    </a>
+
+                                    <div class="center">
+                                        <ReactStars
+                                            count={5}
+                                            value={getRandomRating()}
+                                            onChange={ratingChanged}
+                                            size={24}
+                                            activeColor="#ffd700"
+                                            edit={false}
+                                            size={17}
+                                        />
+                                    </div>
+
+                                    <center>
+                                        <p>{getRandomDifficulty()} &nbsp; - &nbsp; {getRandomDuration()}</p>
+                                    </center>
+
+                                </div>)
+                            })}
                         
                     </div>
                 </div>
