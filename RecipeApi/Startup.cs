@@ -14,6 +14,9 @@ using Microsoft.Extensions.Options;
 using RecipeApi.Models;
 using RecipeApi.Services;
 using System.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace RecipeApi
 {
@@ -29,14 +32,17 @@ namespace RecipeApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // //Cors Fix
             services.AddCors(options =>
                 {
                     options.AddPolicy(MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();;
+                        builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod(); ;
                     });
                 });
+
+
             // requires using Microsoft.Extensions.Options
             services.Configure<RecipeDatabaseSettings>(
                 Configuration.GetSection(nameof(RecipeDatabaseSettings)));
@@ -44,10 +50,30 @@ namespace RecipeApi
             services.AddSingleton<IRecipeDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<RecipeDatabaseSettings>>().Value);
 
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen();
+
             services.AddSingleton<RecipeService>();
+            services.AddSingleton<UserService>();
+
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("BtHE1zD41lhZm9yqU8b2LTDrRAXiZXY2I0WuB5xRjpkpIApjcX47V3UxWR1zLPt")),
+                    };
+                }
+            );
+
 
             services.AddControllers();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +84,24 @@ namespace RecipeApi
                 app.UseDeveloperExceptionPage();
             }
 
+        //     //Cors fix
+        //     app.UseCors(builder =>
+        //    {
+        //         builder.WithOrigins("http://localhost:3000");
+        //         builder.AllowAnyMethod();
+        //         builder.AllowAnyHeader();
+        //    });
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
@@ -65,9 +109,13 @@ namespace RecipeApi
 
             app.UseRouting();
 
-            app.UseAuthorization();
 
-            app.UseCors(MyAllowSpecificOrigins); 
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+            
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {

@@ -1,15 +1,19 @@
 import { LinkContainer } from "react-router-bootstrap";
 import { AppContext } from "./libs/contextLib";
-import React from "react";
+import React, {useContext} from "react";
 import Routes from "./Routes";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import "./App.css";
 import "./containers/RecipePage.js";
 import UpdateRecipe from "./containers/UpdateRecipe";
+import {AuthContext} from './libs/AuthContext';
 
 function App() {
+  const {isAuthorised, logout, email} = useContext(AuthContext);
+  const history = useHistory();
+
   return (
     <div className="App container">
       <Navbar fluid collapseOnSelect>
@@ -27,9 +31,13 @@ function App() {
             <LinkContainer to="/recipepage">
               <NavItem>Recipe Page</NavItem>
             </LinkContainer>
+            {!isAuthorised ? (
             <LinkContainer to="/login">
               <NavItem>Login</NavItem>
             </LinkContainer>
+            ) : (
+              <NavItem onClick={() => {logout(); history.push('/login');}}>Logout</NavItem>
+            )}
             <LinkContainer to="/createrecipe">
               <NavItem>Create Recipe</NavItem>
             </LinkContainer>
@@ -39,6 +47,10 @@ function App() {
             <LinkContainer to="/myrecipes">
               <NavItem>My Recipes</NavItem>
             </LinkContainer>
+            <LinkContainer to="/accountmanagement">
+              <NavItem>Account Management</NavItem>
+            </LinkContainer>
+            {email && <NavItem disabled>{email}</NavItem>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
