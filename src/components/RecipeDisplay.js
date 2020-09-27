@@ -60,7 +60,7 @@ export async function FetchRecipes(options) {
     //load incrementally
     if (index != -1) {
         index = index-1;
-        if (foods[index] != null) {
+        if (foods[index] != null && index < max) {
             return {
                 'id': index,
                 'food': foods[index],

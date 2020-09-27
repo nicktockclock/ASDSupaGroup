@@ -24,7 +24,8 @@ class Home extends Component {
       for (i = 1; didReturn; i++) {
           var tmp = await FetchRecipes({
               index: i,
-              sort:"popular"
+              sort:"popular",
+              max:12
           });
 
           didReturn = (tmp != null);
