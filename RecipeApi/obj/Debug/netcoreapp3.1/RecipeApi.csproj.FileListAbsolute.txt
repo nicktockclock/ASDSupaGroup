@@ -158,3 +158,8 @@ C:/Users/admin/Documents/NetBeansProjects/ASDSupaGroup/RecipeApi/bin/Debug/netco
 /Users/fbrennanbohm/Uni/ASD/RecipeApi/obj/Debug/netcoreapp3.1/RecipeApi.dll
 /Users/fbrennanbohm/Uni/ASD/RecipeApi/obj/Debug/netcoreapp3.1/RecipeApi.pdb
 /Users/fbrennanbohm/Uni/ASD/RecipeApi/obj/Debug/netcoreapp3.1/RecipeApi.genruntimeconfig.cache
+/Users/fbrennanbohm/Uni/ASD/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.OpenApi.dll
+/Users/fbrennanbohm/Uni/ASD/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.Swagger.dll
+/Users/fbrennanbohm/Uni/ASD/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/fbrennanbohm/Uni/ASD/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/fbrennanbohm/Uni/ASD/RecipeApi/obj/Debug/netcoreapp3.1/RecipeApi.MvcApplicationPartsAssemblyInfo.cs

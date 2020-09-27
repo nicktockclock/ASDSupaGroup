@@ -34,7 +34,7 @@ namespace RecipeApi
                     options.AddPolicy(MyAllowSpecificOrigins,
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod();;
+                        builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod(); ;
                     });
                 });
             // requires using Microsoft.Extensions.Options
@@ -44,10 +44,13 @@ namespace RecipeApi
             services.AddSingleton<IRecipeDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<RecipeDatabaseSettings>>().Value);
 
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen();
+
             services.AddSingleton<RecipeService>();
 
             services.AddControllers();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +61,17 @@ namespace RecipeApi
                 app.UseDeveloperExceptionPage();
             }
 
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
@@ -67,7 +81,7 @@ namespace RecipeApi
 
             app.UseAuthorization();
 
-            app.UseCors(MyAllowSpecificOrigins); 
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {
