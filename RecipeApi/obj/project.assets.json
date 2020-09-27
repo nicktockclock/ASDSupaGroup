@@ -6289,19 +6289,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\admin\\.nuget\\packages\\": {}
+    "/Users/nicktockclock/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj",
+      "projectUniqueName": "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/RecipeApi.csproj",
       "projectName": "RecipeApi",
-      "projectPath": "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj",
-      "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\admin\\Documents\\NetBeansProjects\\ASDSupaGroup\\RecipeApi\\obj\\",
+      "projectPath": "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/RecipeApi.csproj",
+      "packagesPath": "/Users/nicktockclock/.nuget/packages/",
+      "outputPath": "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/nicktockclock/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -6354,7 +6354,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
       }
     }
   },

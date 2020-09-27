@@ -29,7 +29,7 @@ class ViewTable extends Component {
                     {this.props.obj.ingredients}
                 </td>
                 <td>
-                    {this.props.obj.cooktime}
+                    {this.props.obj.cookTime}
                 </td>
                 <td>
                     {this.props.obj.servings}
@@ -43,7 +43,7 @@ class ViewTable extends Component {
                 <td>
                     <Link
                         to={{
-                            pathname: "/updaterecipe",
+                            pathname: "/myrecipes/updaterecipe",
                             state: {id: this.props.obj.id}
                         }}
                     >Update</Link>

@@ -9,7 +9,12 @@ class RecipePage extends Component {
                 <h1>Crispy Fried Chicken </h1>
     
              <input type="button" value="Save"></input>
-    
+             <button><a href="https://www.facebook.com/sharer/sharer.php?u=example.org" target="_blank">
+                Share on Facebook
+              </a>
+            </button>
+
+
      <br></br>
 
     <img src="Fried Chicken.jpg" alt="Fried Chicken" width="500" height="600"></img>
