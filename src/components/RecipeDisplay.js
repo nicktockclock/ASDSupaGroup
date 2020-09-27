@@ -44,8 +44,6 @@ export async function FetchRecipes(options) {
     //index = 1+ (int) //which index food to return (speed optimisation)
     //sort = "popular" "recent" "shortest" "easiest" "hardest" "alphabetical"
     //max = int
-
-    console.log("INDEX" + index);
         
     var foods = ["burger", "pizza", "salad", "Bolognese", "steak",
      "chicken schnitzel", "risotto", "lasagne", "curry", "salad",

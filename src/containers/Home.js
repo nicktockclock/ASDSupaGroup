@@ -30,8 +30,6 @@ class Home extends Component {
 
           didReturn = (tmp != null);
           if (didReturn) r.push(tmp);
-          console.log("returned: ");
-          console.log(tmp);
          
           this.setState({recipes: r});
       }
