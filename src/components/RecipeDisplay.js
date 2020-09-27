@@ -1,6 +1,6 @@
 import React from "react";
 import "./RecipeDisplay.css";
-import ReactStars from "react-rating-stars-component";
+// import ReactStars from "react-rating-stars-component";
 
 import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratingChanged} from "../containers/Utils.js";
 //https://stackoverflow.com/questions/44552557/update-specific-component-instance-in-react-js-based-on-an-id
@@ -16,7 +16,7 @@ export const RecipeCards = ({ recipes }) => (
               </a>
 
               <div className="center">
-                  <ReactStars
+                  {/* <ReactStars
                       count={5}
                       value={recipe.rating}
                       onChange={ratingChanged}
@@ -24,7 +24,7 @@ export const RecipeCards = ({ recipes }) => (
                       activeColor="#ffd700"
                       edit={false}
                       size={17}
-                  />
+                  /> */}
               </div>
 
               <center>

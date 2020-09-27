@@ -3,7 +3,7 @@ import "./Home.css";
 import { Button } from "react-bootstrap";
 import {RecipeCards, FetchRecipes} from "../components/RecipeDisplay";
 import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratingChanged} from "./Utils.js";
-import ReactStars from "react-rating-stars-component";
+// import ReactStars from "react-rating-stars-component";
 
 
 //export default function Home() {
