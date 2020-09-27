@@ -1,4 +1,4 @@
-div.gallery {
+div.card {
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
@@ -6,11 +6,11 @@ div.gallery {
     height: 250px;
 }
 
-div.gallery:hover {
+div.card:hover {
     border: 3px solid #777;
 }
 
-div.gallery img {
+div.card img {
     width: 100%;
     height: auto;
 }

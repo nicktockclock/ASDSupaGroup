@@ -1,5 +1,3 @@
-import { findAllInRenderedTree } from "react-dom/test-utils";
-
 function random(max) {  //between 0 and max
     return Math.floor(Math.random() * Math.floor(max)); 
 } 
@@ -23,27 +21,35 @@ export async function getImage(query) {
 
     var API_KEY = '18450465-6164ddf437f4967c4e5570f90';
     var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(query);
+    URL += "&per_page=3" //min 3 max 200
+    URL += "&orientation=horizontal";
+    URL += "&image_type=photo";
+    URL += "&category=food";
+    URL += "&safesearch=true";
     
-    console.log(URL); 
-
+    //console.log("API Call=" + URL); 
     
-    var return_string = await getJSON(URL).then(data => {
+    var image_url = await getJSON(URL).then(data => {
         if (parseInt(data.totalHits) > 0) {
             var hits = data.hits;
             for (var key in hits) {
                 if (data.hits.hasOwnProperty(key)) {
-                    console.log(key + " -> " + hits[key].largeImageURL);
-                    return hits[key].largeImageURL;
+                    //console.log(key + " -> " + hits[key].largeImageURL);
+
+                    //var originalURL = hits[key].largeImageURL;
+                    var webURL = hits[key].webformatURL;
+                    return webURL;
                 }
             }
         }
+        
         return "";
     }).catch(error => {
         console.error("error!:" + error);
         return "";
     });
-    
-    return return_string;
+
+    return image_url;
 }
 
 export const ratingChanged = (newRating) => {
@@ -63,8 +69,5 @@ export function getRandomDifficulty() {
 export function getRandomDuration() {
     let array = ["30 mins", "45 mins", "60 mins", "90 mins", "120 mins"];
     let index = random(array.length - 1);
-    console.log("here");
-    console.log(index);
-    console.log(array[index]);
     return array[index];
 }
