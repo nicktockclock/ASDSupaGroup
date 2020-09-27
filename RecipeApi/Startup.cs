@@ -14,6 +14,9 @@ using Microsoft.Extensions.Options;
 using RecipeApi.Models;
 using RecipeApi.Services;
 using System.Diagnostics;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace RecipeApi
 {
@@ -53,6 +56,22 @@ namespace RecipeApi
             services.AddSingleton<RecipeService>();
             services.AddSingleton<UserService>();
 
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("BtHE1zD41lhZm9yqU8b2LTDrRAXiZXY2I0WuB5xRjpkpIApjcX47V3UxWR1zLPt")),
+                    };
+                }
+            );
+
+
             services.AddControllers();
 
         }
@@ -90,7 +109,11 @@ namespace RecipeApi
 
             app.UseRouting();
 
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
+            
 
             app.UseCors(MyAllowSpecificOrigins);
 

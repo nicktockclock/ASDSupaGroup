@@ -3,6 +3,7 @@ using RecipeApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Diagnostics;
+using RecipeApi.DTOs;
 
 namespace RecipeApi.Controllers
 {
@@ -70,6 +71,14 @@ namespace RecipeApi.Controllers
             _userService.Remove(user.userID);
 
             return NoContent();
+        }
+
+        [HttpPost("authenticate")]
+        public ActionResult<string> Login(AuthenticateDTO payload)
+        {
+            var token = _userService.Authenticate(payload);
+            if (token == null) return Unauthorized();
+            return token;
         }
     }
 }

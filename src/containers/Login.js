@@ -1,8 +1,11 @@
 import React, { Component, useState } from 'react';
-import { Button, Form, FormGroup, FormControl, Col, Checkbox, ControlLabel } from 'react-bootstrap';
+import { Button, Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Alert } from 'react-bootstrap';
 import "./Login.css";
 import Routes from "../Routes";
-import axios from 'axios'
+import axios from 'axios';
+import api from '../libs/api';
+import { AuthContext } from '../libs/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 class Login extends Component {
     constructor(props) {
@@ -11,6 +14,7 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
+            error: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
@@ -18,98 +22,69 @@ class Login extends Component {
 
     handleChange(event) {
         this.setState({
+            error: "",
             [event.target.name]: event.target.value
         })
     }
 
-    handleSubmit(event) {
-        const { email, password } = this.state;
-
-        axios.post(
-            "http://localhost:5000/api/users",
-            {
-                user: {
-                    email: email,
-                    password: password
-                }
-            },
-            { withCredentials: true }
-        )
-            .then(response => {
-                if (response.data.logged_in) {
-                    this.props.handleSuccessfulAuth(response.data);
-                }
-            })
-            .catch(error => {
-                console.log("login error", error);
-            });
+    async handleSubmit(event) {
         event.preventDefault();
+        const { email, password } = this.state;
+        try {
+            const response = await api().post('/users/authenticate', { email, password });
+            this.props.login(response.data);
+            this.props.history.push('/')
+        } catch (e) {
+            this.setState({ error: e });
+        }
     }
-
-
-
-
-
-
-
-
 
     render() {
         return (
-            <div className="Login">
-                {/* //     <Form horizontal>
-            //         <FormGroup controlId="formHorizontalEmail" bsSize='large'>
-            //             <Col componentClass={ControlLabel} sm={3}>Email</Col>
-            //             <Col sm={10}>
-            //                 <FormControl type="email" placeholder="Email" />
-            //             </Col>
-            //         </FormGroup>
+            <div className="Login" onSubmit={this.handleSubmit}>
+                <Form horizontal>
+                    <FormGroup controlId="formHorizontalEmail" bsSize='large'>
+                        <Col componentClass={ControlLabel} sm={3}>Email</Col>
+                        <Col sm={10}>
+                            <FormControl type="email" placeholder="Email" name="email" onChange={this.handleChange} />
+                        </Col>
+                    </FormGroup>
 
-            //         <FormGroup controlId="formHorizontalPassword" bsSize='large'>
-            //             <Col componentClass={ControlLabel} sm={3}>Password</Col>
-            //             <Col sm={10}>
-            //                 <FormControl type="password" placeholder="Password" />
-            //             </Col>
-            //         </FormGroup>
+                    <FormGroup controlId="formHorizontalPassword" bsSize='large'>
+                        <Col componentClass={ControlLabel} sm={3}>Password</Col>
+                        <Col sm={10}>
+                            <FormControl type="password" placeholder="Password" name="password" onChange={this.handleChange} />
+                        </Col>
+                    </FormGroup>
 
-            //         <FormGroup >
-            //             <Col smOffset={2} sm={10}>
-            //                 <Checkbox>Remember me</Checkbox>
-            //             </Col>
-            //         </FormGroup>
-
-            //         <FormGroup>
-            //             <Col smOffset={2} sm={10}>
-            //                 <Button type="submit" bsSize='large'>Sign in</Button>
-            //             </Col>
-            //         </FormGroup>
-                //     </Form> */}
-                <form onSubmit={this.handleSubmit}>
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={this.state.email}
-                        onChange={this.handleChange}
-                        required
-                    />
-
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={this.state.password}
-                        onChange={this.handleChange}
-                        required
-                    />
-
-                    <button type="submit">Login</button>
-                </form>
+                    <FormGroup >
+                        <Col smOffset={2} sm={10}>
+                            <Checkbox>Remember me</Checkbox>
+                        </Col>
+                    </FormGroup>
+                    {this.state.error != "" && <FormGroup >
+                        <Col smOffset={2} sm={10}>
+                            <Alert>{JSON.stringify(this.state.error.message)}</Alert>
+                        </Col>
+                    </FormGroup>}
+                    <FormGroup>
+                        <Col smOffset={2} sm={10}>
+                            <Button type="submit" bsSize='large'>Sign in</Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
             </div>
 
 
         )
     }
 }
-export default Login;
+
+const Wrapper = (props) => {
+    const history = useHistory();
+    return (<AuthContext>{ctx => <Login {...props} {...ctx} history={history} />}</AuthContext>
+    )
+}
+
+export default Wrapper;
 
