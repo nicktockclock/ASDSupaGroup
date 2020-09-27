@@ -8,6 +8,7 @@ import CreateRecipe from "./containers/CreateRecipe";
 import MyRecipes from "./containers/MyRecipes";
 import UpdateRecipe from "./containers/UpdateRecipe";
 import AccountManager from "./containers/AccountManager";
+import UpdateUser from "./containers/UpdateUser";
 
 export default function Routes() {
   return (
@@ -34,6 +35,7 @@ export default function Routes() {
         <AccountManager/>
       </Route>
       <Route path="/myrecipes/updaterecipe" render={props => <UpdateRecipe {...props} className="MyRecipes" app={this}/>}/>
+      <Route path="/accountmanagement/updateuser" render={props => <UpdateUser {...props}/>}/>
     </Switch>
   );}
 
