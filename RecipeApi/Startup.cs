@@ -48,6 +48,7 @@ namespace RecipeApi
             services.AddSwaggerGen();
 
             services.AddSingleton<RecipeService>();
+            services.AddSingleton<UserService>();
 
             services.AddControllers();
 

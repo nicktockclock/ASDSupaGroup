@@ -5,57 +5,45 @@ import data from '../data/users.json'
 import { Link } from 'react-router-dom';
 import UserList from '../components/UserList';
 
-let state = data.users;
+class AccountManager extends Component {
+    state = data.users;
 
-removeUser = (index) => {
-    const {users} = this.state
+    removeUser = (id) => {
+        const { users } = this.state
 
-    this.setState({
-        users: users.filter((user, i) => {
-            return i !== index
+        this.setState({
+            items: users.filter((user, index) => {
+                return user.id !== id
+            }),
         })
-    })
-}
+    }
 
-
-
-const rows = data.users.map((user, index) => {
-    return (
-        <tbody>
-            <tr key={index}>
-                <td>{user.email}</td>
-                <td>
-                    <Link
-                        to={{
-                            pathname: "/accountmanagement/updateuser",
-                        }}
-                        userName={user.id}
-                    >Update</Link>
-                </td>
-                <td><Button variant="danger">Delete</Button></td>
-                {/* // <td align='center'><Button variant="danger" onClick={() => props.removeItem(item.id)}>Delete</Button></td>
-                /* <td align='center'><Button variant="success" onClick={() => props.removeItem(item.id)}>Update</Button></td> */}
-            </tr>
-        </tbody>
-    )
-})
-
-
-export class AccountManager extends Component {
     render() {
-        const {users} = this.state
+        const { users } = this.state
         return (
-            <UserList users={users} removeUser={this.removeUser}/>
-            // <Table>
-            //     <thead>
-            //         <tr>
-            //             <th>Email</th>
-            //             <th className='button-header'>Edit</th>
-            //             <th className='button-header'>Delete</th>
-            //         </tr>
-            //     </thead>
-            //     {rows}
-            // </Table>
+            <Table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th className='button-header'>Edit</th>
+                        <th className='button-header'>Delete</th>
+                    </tr>
+                </thead>
+                {
+                    data.users.map((user, index) => {
+                        return (
+                            <tbody>
+                                <tr key={index}>
+                                    <td>{user.email}</td>
+                                    <td>
+                                        <Link to={{pathname: "/accountmanagement/updateuser",}} userName={user.id}>Update</Link></td>
+                                    <td align='left'><Button variant="danger" onClick={() => this.removeUser(user.id)}>Delete</Button></td>
+                                </tr>
+                            </tbody>
+                        )
+                    })
+                }
+            </Table>
         )
     }
 }
