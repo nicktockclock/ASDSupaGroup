@@ -7,10 +7,9 @@ import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratin
 
 export const RecipeCards = ({ recipes }) => (
   <div>
-    {console.log("called:" + recipes.length)}
       {recipes.map(recipe =>
 
-          <div className="card">
+          <div className="card" key={recipe.id}>
               <a target="_blank" href="{value}">
                   <p className="name">{recipe.food}</p>
                   <img src={recipe.url} width="300"/>
@@ -38,27 +37,55 @@ export const RecipeCards = ({ recipes }) => (
 
 export async function FetchRecipes(options) {
     var options = options || {};
+    var index = options.index || -1;
     var sort = options.sort || "popular";
     var max = options.max || 100;
     //*paramters*
+    //index = 1+ (int) //which index food to return (speed optimisation)
     //sort = "popular" "recent" "shortest" "easiest" "hardest" "alphabetical"
     //max = int
-        
-    var foods = ["burger", "pizza", "salad", "Bolognese", "steak", "chicken schnitzel", "risotto", "lasagne", "curry", "salad", "panna cotta", "sushi", "toasted sandwich", "creme brulee"];
 
-    var updatedRecipes = [];
-    var index = 0;
+    console.log("INDEX" + index);
+        
+    var foods = ["burger", "pizza", "salad", "Bolognese", "steak",
+     "chicken schnitzel", "risotto", "lasagne", "curry", "salad",
+      "panna cotta", "sushi", "toasted sandwich", "creme brulee",
+    "apple pie", "bread", "poached eggs", "scrambled eggs", "pancakes",
+    "tacos", "dumplings", "peking duck", "spring rolls", "paella"];
 
     //needs to be:
     //db api call to get popular recipes
     //include sort
 
+    //load incrementally
+    if (index != -1) {
+        index = index-1;
+        if (foods[index] != null) {
+            return {
+                'id': index,
+                'food': foods[index],
+                'url': await getImage(foods[index]),
+                'rating': getRandomRating(),
+                'difficulty': getRandomDifficulty(),
+                'duration': getRandomDuration()
+            }
+        } else {
+            return null;
+        }
+        
+    }
+
+
+    var updatedRecipes = [];
+    var count = 0;
+
+    //load all at once
     for (const food of foods) { 
         
-        if (index > max-1) break; //exit once we've received max
+        if (count > max-1) break; //exit once we've received max
 
         const r = {
-            'id': index,
+            'id': count,
             'food': food,
             'url': await getImage(food),
             'rating': getRandomRating(),
@@ -66,7 +93,7 @@ export async function FetchRecipes(options) {
             'duration': getRandomDuration()
         }
         updatedRecipes.push(r);
-        index++;
+        count++;
     }
     return updatedRecipes;
 }

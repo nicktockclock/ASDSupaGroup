@@ -17,11 +17,27 @@ class Home extends Component {
     };
   }
 
+  async incrementalLoad() {
+      var didReturn = true;        
+      var r = [];
+      var i;
+      for (i = 1; didReturn; i++) {
+          var tmp = await FetchRecipes({
+              index: i,
+              sort:"popular"
+          });
+
+          didReturn = (tmp != null);
+          if (didReturn) r.push(tmp);
+          console.log("returned: ");
+          console.log(tmp);
+         
+          this.setState({recipes: r});
+      }
+  }
+
   async componentDidMount () {
-    this.setState({recipes: await FetchRecipes({
-      sort: "popular",
-      max: 12
-    })})
+    this.incrementalLoad();
   }
 
   render() { 

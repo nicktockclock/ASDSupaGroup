@@ -14,10 +14,35 @@ class ListRecipes extends Component {
         };
     }
 
-    async componentDidMount () {
+    async incrementalLoad() {
+        var didReturn = true;        
+        var r = [];
+        var i;
+        for (i = 1; didReturn; i++) {
+            var tmp = await FetchRecipes({
+                index: i,
+                sort:"popular"
+            });
+
+            didReturn = (tmp != null);
+            if (didReturn) r.push(tmp);
+            console.log("returned: ");
+            console.log(tmp);
+           
+            this.setState({recipes: r});
+        }
+    }
+
+    async fullLoad() {
         this.setState({recipes: await FetchRecipes({
-            sort:"popular"
+            sort: "popular",
+            max: 12
         })})
+    }
+
+    componentDidMount () {
+        this.incrementalLoad();
+        //this.fullLoad();
     }
     
     render() {        
