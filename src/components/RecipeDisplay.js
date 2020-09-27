@@ -7,7 +7,7 @@ import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratin
 
 export const RecipeCards = ({ recipes }) => (
   <div>
-
+    {console.log("called:" + recipes.length)}
       {recipes.map(recipe =>
 
           <div className="card">
@@ -43,35 +43,30 @@ export async function FetchRecipes(options) {
     //*paramters*
     //sort = "popular" "recent" "shortest" "easiest" "hardest" "alphabetical"
     //max = int
-
-
-    //async updateRecipes() {
         
-        var foods = ["burger", "pizza", "salad", "Bolognese", "steak", "chicken schnitzel", "risotto", "lasagne", "curry", "salad", "panna cotta", "sushi", "toasted sandwich", "creme brulee"];
+    var foods = ["burger", "pizza", "salad", "Bolognese", "steak", "chicken schnitzel", "risotto", "lasagne", "curry", "salad", "panna cotta", "sushi", "toasted sandwich", "creme brulee"];
 
-        var updatedRecipes = [];
-        var index = 0;
+    var updatedRecipes = [];
+    var index = 0;
 
-        //needs to be:
-        //db api call to get popular recipes
-        //include sort
+    //needs to be:
+    //db api call to get popular recipes
+    //include sort
 
-        for (const food of foods) { 
-            
-            if (index > max-1) break; //exit once we've received max
+    for (const food of foods) { 
+        
+        if (index > max-1) break; //exit once we've received max
 
-            const r = {
-                'id': index,
-                'food': food,
-                'url': await getImage(food),
-                'rating': getRandomRating(),
-                'difficulty': getRandomDifficulty(),
-                'duration': getRandomDuration()
-            }
-            updatedRecipes.push(r);
-            index++;
+        const r = {
+            'id': index,
+            'food': food,
+            'url': await getImage(food),
+            'rating': getRandomRating(),
+            'difficulty': getRandomDifficulty(),
+            'duration': getRandomDuration()
         }
-        //console.log(updatedRecipes);
-        return updatedRecipes;
-    //}
+        updatedRecipes.push(r);
+        index++;
+    }
+    return updatedRecipes;
 }
