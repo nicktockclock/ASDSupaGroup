@@ -106,7 +106,7 @@ class CreateRecipe extends Component {
                 <div className = "wrapper-recipe">
                     <p>Your recipe has been successfully created.</p>
                     <Col smOffset={2} sm={10}>
-                        <Button value='false' onClick={(event => this.setState({ created: true}))}>
+                        <Button value='false' onClick={(event => this.setState({ created: false}))}>
                             Add Another Recipe
                         </Button>
                         <Link to='/'>
