@@ -97,7 +97,15 @@ class CreateRecipe extends Component {
                 console.log(error)
             });
 
-        this.setState({ created: true})
+        this.setState({ created: true,
+            name: '',
+            description: '',
+            instructions: '',
+            ingredients: '',
+            cooktime: '',
+            servings: '',
+            difficulty: 'Easy',
+            calories: '',})
     }
 
     render() {
