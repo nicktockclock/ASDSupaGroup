@@ -37,7 +37,8 @@ class AccountManager extends Component {
                                     <td>{user.email}</td>
                                     <td>
                                         <Link to={{pathname: "/accountmanagement/updateuser",}} userName={user.id}>Update</Link></td>
-                                    <td align='left'><Button variant="danger" onClick={() => this.removeUser(user.id)}>Delete</Button></td>
+                                    <td align='left'><Button variant="danger">Delete</Button></td>
+                                    {/* <td align='left'><Button variant="danger" onClick={() => this.removeUser(user.id)}>Delete</Button></td> */}
                                 </tr>
                             </tbody>
                         )

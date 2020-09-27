@@ -29,6 +29,7 @@ namespace RecipeApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // //Cors Fix
             services.AddCors(options =>
                 {
                     options.AddPolicy(MyAllowSpecificOrigins,
@@ -37,6 +38,8 @@ namespace RecipeApi
                         builder.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod(); ;
                     });
                 });
+
+
             // requires using Microsoft.Extensions.Options
             services.Configure<RecipeDatabaseSettings>(
                 Configuration.GetSection(nameof(RecipeDatabaseSettings)));
@@ -62,6 +65,13 @@ namespace RecipeApi
                 app.UseDeveloperExceptionPage();
             }
 
+        //     //Cors fix
+        //     app.UseCors(builder =>
+        //    {
+        //         builder.WithOrigins("http://localhost:3000");
+        //         builder.AllowAnyMethod();
+        //         builder.AllowAnyHeader();
+        //    });
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 

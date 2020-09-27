@@ -39,7 +39,7 @@ namespace RecipeApi.Controllers
         {
             _userService.Create(user);
 
-            return CreatedAtRoute("GetUser", new { id = user.Id.ToString() }, user);
+            return CreatedAtRoute("GetUser", new { id = user.userID.ToString() }, user);
         }
 
         [HttpPut("{id:length(24)}")]
@@ -67,7 +67,7 @@ namespace RecipeApi.Controllers
                 return NotFound();
             }
 
-            _userService.Remove(user.Id);
+            _userService.Remove(user.userID);
 
             return NoContent();
         }

@@ -22,7 +22,7 @@ namespace RecipeApi.Services
             _users.Find(user => true).ToList();
 
         public User Get(string id) =>
-            _users.Find<User>(user => user.Id == id).FirstOrDefault();
+            _users.Find<User>(user => user.userID == id).FirstOrDefault();
 
         public User Create(User user)
         {
@@ -31,12 +31,12 @@ namespace RecipeApi.Services
         }
 
         public void Update(string id, User userIn) =>
-            _users.ReplaceOne(user => user.Id == id, userIn);
+            _users.ReplaceOne(user => user.userID == id, userIn);
 
         public void Remove(User userIn) =>
-            _users.DeleteOne(user => user.Id == userIn.Id);
+            _users.DeleteOne(user => user.userID == userIn.userID);
 
         public void Remove(string id) => 
-            _users.DeleteOne(user => user.Id == id);
+            _users.DeleteOne(user => user.userID == id);
     }
 }

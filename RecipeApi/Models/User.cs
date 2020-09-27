@@ -7,7 +7,7 @@ namespace RecipeApi.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string userID { get; set; }
         public string email { get; set; }
         public string password { get; set; }
     }
