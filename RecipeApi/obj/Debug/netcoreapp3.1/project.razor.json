@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "FilePath": "/Users/fbrennanbohm/Uni/ASD/RecipeApi/RecipeApi.csproj",
+=======
+  "FilePath": "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/RecipeApi.csproj",
+>>>>>>> 99bde545fc3f405da56fa5d55ef73ca2626a5e32
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
