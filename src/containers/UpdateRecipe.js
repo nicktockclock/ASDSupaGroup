@@ -27,7 +27,9 @@ class UpdateRecipe extends Component {
             servings: 0,
             difficulty: 'Easy',
             calories: 0,
-            updated: false
+            updated: false,
+            caloriesError: false,
+            servingsError: false
         }   
     }
 
@@ -52,6 +54,11 @@ class UpdateRecipe extends Component {
     }
 
     onChangeRecipeServings(e) {
+        if (isNaN(e.target.value)){
+            this.setState({servingsError: true});
+            return;
+        }
+        this.setState({servingsError: false});
         this.setState({ servings: e.target.value })
     }
 
@@ -60,6 +67,11 @@ class UpdateRecipe extends Component {
     }
 
     onChangeRecipeCalories(e) {
+        if (isNaN(e.target.value)){
+            this.setState({caloriesError: true});
+            return;
+        }
+        this.setState({caloriesError: false});
         this.setState({ calories: e.target.value })
         
     }
@@ -111,6 +123,8 @@ class UpdateRecipe extends Component {
             return <Redirect to = {{ pathname: "/myrecipes" }} />;
         }
         else{
+            const servingerror = this.state.servingsError;
+            const calorieerror = this.state.caloriesError;
             return (
                 <div className="wrapper-recipe">
                     <Form horizontal onSubmit={this.onSubmit}>
@@ -152,7 +166,7 @@ class UpdateRecipe extends Component {
                         <FormGroup controlId="formHorizontalServings" bsSize='large'>
                             <Col componentClass={ControlLabel} sm={2}>How many Servings</Col>
                             <Col sm={10}>
-                                <FormControl type="number" placeholder="Servings" value={this.state.servings} onChange={this.onChangeRecipeServings}/>
+                                <FormControl type="text" placeholder="Servings" value={this.state.servings} onChange={this.onChangeRecipeServings}/>
                             </Col>
                         </FormGroup>
     
@@ -170,10 +184,12 @@ class UpdateRecipe extends Component {
                         <FormGroup controlId="formHorizontalCalories" bsSize='large'>
                             <Col componentClass={ControlLabel} sm={2}>Calories (kCal)</Col>
                             <Col sm={10}>
-                                <FormControl type="number" placeholder="Calories" value={this.state.calories} onChange={this.onChangeRecipeCalories}/>
+                                <FormControl type="text" placeholder="Calories" value={this.state.calories} onChange={this.onChangeRecipeCalories}/>
                             </Col>
                         </FormGroup>
-    
+                        {servingerror && <b>Servings must be an integer.</b>}
+                        <br></br>
+                        {calorieerror && <b>Calories must be an integer.</b>}
                         <FormGroup>
                             <Col smOffset={2} sm={10}>
                                 <Button type="submit" bsSize='large'>Update Recipe</Button>
