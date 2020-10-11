@@ -30,8 +30,6 @@ class Home extends Component {
 
           didReturn = (tmp != null);
           if (didReturn) r.push(tmp);
-          console.log("returned: ");
-          console.log(tmp);
          
           this.setState({recipes: r});
       }
@@ -50,7 +48,7 @@ class Home extends Component {
           <>
           <div>
           <Button href="/#">Ingredient</Button> 
-          <Button href="/#">Recipe</Button>
+          <Button href="/searchname">Recipe</Button>
           </div>
           </>
         </div>

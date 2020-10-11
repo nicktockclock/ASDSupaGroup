@@ -38,15 +38,19 @@ function App() {
             ) : (
               <NavItem onClick={() => {logout(); history.push('/login');}}>Logout</NavItem>
             )}
+            {isAuthorised &&
             <LinkContainer to="/createrecipe">
               <NavItem>Create Recipe</NavItem>
             </LinkContainer>
+            }
             <LinkContainer to="/listrecipes">
               <NavItem>Browse</NavItem>
             </LinkContainer>
+            {isAuthorised &&
             <LinkContainer to="/myrecipes">
               <NavItem>My Recipes</NavItem>
             </LinkContainer>
+            }
             <LinkContainer to="/accountmanagement">
               <NavItem>Account Management</NavItem>
             </LinkContainer>

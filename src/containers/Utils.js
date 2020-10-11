@@ -3,6 +3,7 @@ function random(max) {  //between 0 and max
 } 
 
 const getJSON = async url => {
+    
     try {
         const response = await fetch(url);
         if(!response.ok) // check if response worked (no 404 errors etc...)

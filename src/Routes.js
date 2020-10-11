@@ -1,6 +1,7 @@
 import Signup from "./containers/Signup";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import PrivateRoute from './PrivateRoute'
 import Home from "./containers/Home";
 import Login from "./containers/Login";
 import Browse from "./containers/Browse";
@@ -11,6 +12,7 @@ import UpdateRecipe from "./containers/UpdateRecipe";
 import ListRecipes from "./containers/ListRecipes";
 import AccountManager from "./containers/AccountManager";
 import UpdateUser from "./containers/UpdateUser";
+import SearchName from "./containers/SearchName";
 
 export default function Routes() {
   return (
@@ -44,6 +46,9 @@ export default function Routes() {
       </Route>
       <Route exact path="/accountmanagement">
         <AccountManager/>
+      </Route>
+      <Route exact path="/searchname">
+        <SearchName/>
       </Route>
       <Route path="/myrecipes/updaterecipe" render={props => <UpdateRecipe {...props} className="MyRecipes" app={this}/>}/>
       <Route path="/accountmanagement/updateuser" render={props => <UpdateUser {...props}/>}/>

@@ -28,12 +28,42 @@ export const RecipeCards = ({ recipes }) => (
               </div>
 
               <center>
-                  <p>{recipe.difficulty} &nbsp; - &nbsp; {recipe.duration}</p>
+                  <p>{recipe.recipeName} &nbsp; - &nbsp; {recipe.difficulty}</p>
               </center>
           </div>
       )}
   </div>
 );
+
+export const RecipeCardsName = ({ recipes }) => (
+    <div>
+        {recipes.map(recipe =>
+              
+            <div className="card" key={recipe.id}>
+                <a target="_blank" href="{value}">
+                    <p className="name">{recipe.food}</p>
+                    <img src={recipe.url} width="300"/>
+                </a>
+  
+                <div className="center">
+                    {/* <ReactStars
+                        count={5}
+                        value={recipe.rating}
+                        onChange={ratingChanged}
+                        size={24}
+                        activeColor="#ffd700"
+                        edit={false}
+                        size={17}
+                    /> */}
+                </div>
+  
+                <center>
+                    <p>{recipe.recipeName} &nbsp; - &nbsp; {recipe.difficulty}</p>
+                </center>
+            </div>
+        )}
+    </div>
+  );
 
 export async function FetchRecipes(options) {
     var options = options || {};
@@ -45,7 +75,7 @@ export async function FetchRecipes(options) {
     //sort = "popular" "recent" "shortest" "easiest" "hardest" "alphabetical"
     //max = int
 
-    console.log("INDEX" + index);
+
         
     var foods = ["burger", "pizza", "salad", "Bolognese", "steak",
      "chicken schnitzel", "risotto", "lasagne", "curry", "salad",

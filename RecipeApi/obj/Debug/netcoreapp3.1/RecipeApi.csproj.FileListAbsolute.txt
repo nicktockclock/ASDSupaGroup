@@ -163,3 +163,15 @@ C:/Users/admin/Documents/NetBeansProjects/ASDSupaGroup/RecipeApi/bin/Debug/netco
 /Users/fbrennanbohm/Uni/ASD/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/fbrennanbohm/Uni/ASD/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll
 /Users/fbrennanbohm/Uni/ASD/RecipeApi/obj/Debug/netcoreapp3.1/RecipeApi.MvcApplicationPartsAssemblyInfo.cs
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Logging.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.IdentityModel.Tokens.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Microsoft.OpenApi.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.Swagger.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/bin/Debug/netcoreapp3.1/System.IdentityModel.Tokens.Jwt.dll
+/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/obj/Debug/netcoreapp3.1/RecipeApi.MvcApplicationPartsAssemblyInfo.cs
