@@ -51,7 +51,7 @@ export default function Routes() {
         <SearchName/>
       </Route>
       <Route path="/myrecipes/updaterecipe" render={props => <UpdateRecipe {...props} className="MyRecipes" app={this}/>}/>
-      <Route path="/accountmanagement/updateuser" render={props => <UpdateUser {...props}/>}/>
+      <Route path={["/accountmanagement/updateuser/:userId", "/accountmanagement/updateuser"]} render={props => <UpdateUser {...props}/>}/>
     </Switch>
   );}
 
