@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import "./Home.css";
 import { Button } from "react-bootstrap";
 import {RecipeCards, getRecipeMetadata, getSorted} from "../components/RecipeDisplay";
-import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratingChanged} from "./Utils.js";
-// import ReactStars from "react-rating-stars-component";
-
 
 //export default function Home() {
 class Home extends Component {
