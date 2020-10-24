@@ -34,6 +34,13 @@ namespace RecipeApi.Controllers
             return recipe;
         }
 
+        [HttpGet("myrecipes")]
+        public ActionResult<List<Recipe>> GetMyRecipes(string owner)
+        {
+            
+            return _recipeService.GetMyRecipes(owner);
+        }
+
         [HttpPost]
         public ActionResult<Recipe> Create(Recipe recipe)
         {

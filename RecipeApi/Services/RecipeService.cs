@@ -24,6 +24,9 @@ namespace RecipeApi.Services
         public Recipe Get(string id) =>
             _recipes.Find<Recipe>(recipe => recipe.Id == id).FirstOrDefault();
 
+        public List<Recipe> GetMyRecipes(string owner) =>
+            _recipes.Find(recipe => recipe.owner == owner).ToList();
+
         public Recipe Create(Recipe recipe)
         {
             _recipes.InsertOne(recipe);

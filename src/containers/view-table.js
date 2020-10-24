@@ -43,7 +43,7 @@ class ViewTable extends Component {
                 <td>
                     <Link
                         to={{
-                            pathname: "/myrecipes/updaterecipe",
+                            pathname: "/updaterecipe",
                             state: {id: this.props.obj.id}
                         }}
                     >Update</Link>

@@ -13,6 +13,7 @@ import {AuthContext} from './libs/AuthContext';
 function App() {
   const {isAuthorised, logout, email} = useContext(AuthContext);
   const history = useHistory();
+  
 
   return (
     <div className="App container">
@@ -38,15 +39,29 @@ function App() {
             ) : (
               <NavItem onClick={() => {logout(); history.push('/login');}}>Logout</NavItem>
             )}
-            <LinkContainer to="/createrecipe">
+            {isAuthorised &&
+            <LinkContainer 
+              to={{
+                  pathname: "/createrecipe",
+                  state: {email: email}
+              }}
+            >
               <NavItem>Create Recipe</NavItem>
             </LinkContainer>
+            }
             <LinkContainer to="/listrecipes">
               <NavItem>Browse</NavItem>
             </LinkContainer>
-            <LinkContainer to="/myrecipes">
+            {isAuthorised &&
+            <LinkContainer 
+              to={{
+                  pathname: "/myrecipes",
+                  state: {email: email}
+              }}
+            >
               <NavItem>My Recipes</NavItem>
             </LinkContainer>
+            }
             <LinkContainer to="/accountmanagement">
               <NavItem>Account Management</NavItem>
             </LinkContainer>
