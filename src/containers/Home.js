@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./Home.css";
 import { Button } from "react-bootstrap";
-import {RecipeCards, FetchRecipes} from "../components/RecipeDisplay";
+import {RecipeCards, getRecipeMetadata, getSorted} from "../components/RecipeDisplay";
 import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratingChanged} from "./Utils.js";
 import ReactStars from "react-rating-stars-component";
 
@@ -18,21 +18,21 @@ class Home extends Component {
   }
 
   async incrementalLoad() {
-      var didReturn = true;        
-      var r = [];
-      var i;
-      for (i = 1; didReturn; i++) {
-          var tmp = await FetchRecipes({
-              index: i,
-              sort:"popular",
-              max:12
-          });
+    var r = [];
+        
+    var sortedRecipes = await getSorted({
+        sort:"popular",
+        max:12
+    });
+    
+    for (const f of sortedRecipes) {
 
-          didReturn = (tmp != null);
-          if (didReturn) r.push(tmp);
-         
-          this.setState({recipes: r});
-      }
+        var tmp = await getRecipeMetadata({
+            food: f
+        });
+        r.push(tmp);
+        this.setState({recipes: r});
+    }
   }
 
   async componentDidMount () {
