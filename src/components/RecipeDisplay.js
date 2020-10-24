@@ -2,8 +2,9 @@ import React from "react";
 import "./RecipeDisplay.css";
 import ReactStars from "react-rating-stars-component";
 
-import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratingChanged} from "../containers/Utils.js";
+import {getImage, getRandomRating, parseDuration, parseCalories, ratingChanged, shuffle} from "../containers/Utils.js";
 //https://stackoverflow.com/questions/44552557/update-specific-component-instance-in-react-js-based-on-an-id
+import Axios from 'axios';
 
 export const RecipeCards = ({ recipes }) => (
   <div>
@@ -28,70 +29,105 @@ export const RecipeCards = ({ recipes }) => (
               </div>
 
               <center>
-                  <p>{recipe.difficulty} &nbsp; - &nbsp; {recipe.duration}</p>
+                  <p>{recipe.difficulty} / {recipe.duration} / {recipe.calories}</p>
               </center>
           </div>
       )}
   </div>
 );
 
-export async function FetchRecipes(options) {
+export async function getRecipeMetadata(options) {
     var options = options || {};
-    var index = options.index || -1;
+    var food = options.food || null;
+    
+    if (food) {
+        var f = {
+            'id': food.id,
+            'food': food.recipeName,
+            'url': await getImage(food.recipeName),
+            'rating': getRandomRating(),
+            'difficulty': food.difficulty, //getRandomDifficulty(),
+            'duration': parseDuration(food.cookTime), //getRandomDuration()
+            'calories' : parseCalories(food.calories)
+        }
+        return f;
+    }  
+    return null; 
+}
+
+export async function getSorted(options) {
+    //sort = alphabetical, time, servings, difficulty, calories
+    //not implemented: popular, new, hot, rating
     var sort = options.sort || "popular";
     var max = options.max || 100;
-    //*paramters*
-    //index = 1+ (int) //which index food to return (speed optimisation)
-    //sort = "popular" "recent" "shortest" "easiest" "hardest" "alphabetical"
-    //max = int
-        
-    var foods = ["burger", "pizza", "salad", "Bolognese", "steak",
-     "chicken schnitzel", "risotto", "lasagne", "curry", "salad",
-      "panna cotta", "sushi", "toasted sandwich", "creme brulee",
-    "apple pie", "bread", "poached eggs", "scrambled eggs", "pancakes",
-    "tacos", "dumplings", "peking duck", "spring rolls", "paella"];
+    var skip = options.skip || 0;
 
-    //needs to be:
-    //db api call to get popular recipes
-    //include sort
+    console.log("SORT:" + sort);
 
-    //load incrementally
-    if (index != -1) {
-        index = index-1;
-        if (foods[index] != null && index < max) {
-            return {
-                'id': index,
-                'food': foods[index],
-                'url': await getImage(foods[index]),
-                'rating': getRandomRating(),
-                'difficulty': getRandomDifficulty(),
-                'duration': getRandomDuration()
-            }
-        } else {
-            return null;
-        }
-        
+    var query = 'http://localhost:5000/api/Recipes?max=' + max + '&skip=' + skip;
+
+    var foods;
+    await Axios.get(query)
+    .then(res => {
+        foods = res.data;
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+    actuallySort(foods, sort);
+
+    return foods;
+}
+
+export function actuallySort(foods, sort) {
+    //popular, alphabetical, cookTime, servings, difficulty, calories, random
+    switch(sort) {
+        case "popular":
+            return foods.sort((a,b) => popularSort(a, b));
+        case "alphabetical":
+            return foods.sort((a,b) => SemiNumericSort(a.recipeName, b.recipeName));
+        case "cookTime":
+            return foods.sort((a,b) => SemiNumericSort(a.cookTime, b.cookTime));
+        case "servings":
+            return foods.sort((a,b) => SemiNumericSort(a.servings, b.servings));
+        case "difficulty":
+            return foods.sort((a,b) => difficultySort(a.difficulty, b.difficulty));
+        case "calories":
+            return foods.sort((a,b) => SemiNumericSort(a.calories, b.calories));
+        case "random":
+            return foods;//shuffle(foods);
     }
+}
 
-
-    var updatedRecipes = [];
-    var count = 0;
-
-    //load all at once
-    for (const food of foods) { 
-        
-        if (count > max-1) break; //exit once we've received max
-
-        const r = {
-            'id': count,
-            'food': food,
-            'url': await getImage(food),
-            'rating': getRandomRating(),
-            'difficulty': getRandomDifficulty(),
-            'duration': getRandomDuration()
-        }
-        updatedRecipes.push(r);
-        count++;
+function SemiNumericSort(a, b) {
+    if (!isNaN(a) && !isNaN(b)) {
+        //both are numbers
+        a = parseInt(a);
+        b = parseInt(b);
+        return a < b ? -1 : 1;
     }
-    return updatedRecipes;
+    return a < b ? -1 : 1;
+}
+
+function difficultySort(a, b) {
+    if (a === b) return 0;
+    
+    if (a === "Easy" && (b === "Moderate" || b === "Hard")) return -1;
+    if (a === "Moderate" && (b === "Hard")) return -1;
+
+    if (b === "Easy" && (a === "Moderate" || a === "Hard")) return 1;
+    if (b === "Moderate" && (a === "Hard")) return 1;
+
+    console.log("a=" + a + ",b=" + b);
+    console.log("REACHED END OF difficultySort");
+}
+
+function popularSort(a, b) {
+    var popularity = 0;
+    popularity += SemiNumericSort(a.cookTime, b.cookTime) * 3;
+    popularity += difficultySort(a.difficulty, b.difficulty) * 2;
+    popularity += SemiNumericSort(a.servings, b.servings) * 1;
+
+    return Math.sign(popularity);
 }
