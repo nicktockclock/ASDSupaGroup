@@ -1,3 +1,19 @@
+.Home .name {
+  text-align: center;
+  color: black;
+  text-transform: capitalize;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.Home .desc {
+  text-align: center;
+  color: black;
+  text-transform: capitalize;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 15px;
+}
+
 .Home .lander {
   padding: 10px 0;
   text-align: center;
