@@ -31,7 +31,8 @@ class SearchName extends Component {
         var sortedRecipes = await getSorted({
             sort:"alphabetical"
         });
-        
+        if (!sortedRecipes) return; //when no results
+
         for (const f of sortedRecipes) {
             var tmp = await getRecipeMetadata({
                 food: f

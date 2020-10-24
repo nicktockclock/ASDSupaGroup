@@ -30,7 +30,7 @@ class ListRecipes extends Component {
             sort: this.state.sort
         });
 
-        console.log(sortedRecipes);
+        if (!sortedRecipes) return; //when no results
 
         for (const f of sortedRecipes) {
             var tmp = await getRecipeMetadata({
