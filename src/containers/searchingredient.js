@@ -1,11 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Button, Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Label } from 'react-bootstrap';
 import "./CreateRecipe.css";
-import Routes from "../Routes";
-import {RecipeCardsName, FetchRecipes} from "../components/RecipeDisplay";
-import axios from 'axios';
-import ViewTable from './view-table';
-import {Link, Redirect} from 'react-router-dom';
+import {RecipeCards, getRecipeMetadata, getSorted} from "../components/RecipeDisplay";
 
 class SearchIngredients extends Component {
     constructor(props) {
@@ -43,16 +39,26 @@ class SearchIngredients extends Component {
         this.setState( {filter: ''} );
     }
 
+    async incrementalLoad() {
+        var r = [];
+            
+        var sortedRecipes = await getSorted({
+            sort:"alphabetical"
+        });
+        
+        for (const f of sortedRecipes) {
+            var tmp = await getRecipeMetadata({
+                food: f
+            });
+            r.push(tmp);
+
+            this.setState({ recipeCollection: r });
+            this.setState({ recipeFiltered: r });
+        }
+    }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/recipes')
-            .then(res => {
-                this.setState({ recipeCollection: res.data });
-                this.setState({ recipeFiltered: res.data });
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        this.incrementalLoad();
     }
 
 
@@ -93,7 +99,7 @@ class SearchIngredients extends Component {
               <div className="popularRecipes">
                 <h1>Popular Recipes</h1> 
                 <div className = "all">
-                  <RecipeCardsName recipes={this.state.recipeFiltered}/>                
+                  <RecipeCards recipes={this.state.recipeFiltered}/>                
                 </div>
               </div>
             </div>
