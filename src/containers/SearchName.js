@@ -7,7 +7,7 @@ import axios from 'axios';
 import ViewTable from './view-table';
 import {Link, Redirect} from 'react-router-dom';
 
-class MyRecipes extends Component {
+class SearchName extends Component {
     constructor(props) {
         super(props);
         this.onChangeRecipeName = this.onChangeRecipeName.bind(this);
@@ -71,4 +71,4 @@ class MyRecipes extends Component {
           );
         }
 }
-export default MyRecipes;
+export default SearchName;

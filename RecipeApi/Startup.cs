@@ -84,13 +84,7 @@ namespace RecipeApi
                 app.UseDeveloperExceptionPage();
             }
 
-        //     //Cors fix
-        //     app.UseCors(builder =>
-        //    {
-        //         builder.WithOrigins("http://localhost:3000");
-        //         builder.AllowAnyMethod();
-        //         builder.AllowAnyHeader();
-        //    });
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 

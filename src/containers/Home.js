@@ -47,7 +47,7 @@ class Home extends Component {
           <h2>Search by...</h2>
           <>
           <div>
-          <Button href="/#">Ingredient</Button> 
+          <Button href="/searchingredient">Ingredient</Button> 
           <Button href="/searchname">Recipe</Button>
           </div>
           </>
