@@ -64,6 +64,8 @@ export async function getSorted(options) {
 
 export function actuallySort(foods, sort) {
     //popular, alphabetical, cookTime, servings, difficulty, calories, random
+    if (!foods) return;  //when no results
+    
     switch(sort) {
         case "popular":
             return foods.sort((a,b) => popularSort(a, b));

@@ -21,6 +21,7 @@ class Home extends Component {
         sort:"popular",
         max:12
     });
+    if (!sortedRecipes) return; //when no results
     
     for (const f of sortedRecipes) {
 

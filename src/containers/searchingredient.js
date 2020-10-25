@@ -45,7 +45,8 @@ class SearchIngredients extends Component {
         var sortedRecipes = await getSorted({
             sort:"alphabetical"
         });
-        
+        if (!sortedRecipes) return; //when no results
+
         for (const f of sortedRecipes) {
 
             r.push(f);
