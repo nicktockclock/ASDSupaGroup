@@ -70,7 +70,7 @@ class SearchIngredients extends Component {
                 <div>
                 <Form horizontal>
                         <FormGroup controlId="formHorizontalName" bsSize='large'>
-                            <Col componentClass={ControlLabel} sm={2}>Recipe Name</Col>
+                            <Col componentClass={ControlLabel} sm={2}>Ingredient Name</Col>
                             <Col sm={10}>
                                 <FormControl type="text" placeholder={this.state.ingredient} value={this.state.ingredient} onChange={this.onChangeRecipeIngredient}/>
                             </Col>
