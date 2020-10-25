@@ -37,7 +37,7 @@ export async function getSorted(options) {
     var max = options.max || 100;
     var skip = options.skip || 0;
 
-    console.log("SORT:" + sort);
+    console.log("getSorted sort,max,skip=" + options.sort + "," + options.max + "," + options.skip);
 
     var query = 'http://localhost:5000/api/Recipes?max=' + max + '&skip=' + skip;
 
