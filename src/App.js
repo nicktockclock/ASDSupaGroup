@@ -52,6 +52,9 @@ function App() {
             <LinkContainer to="/listrecipes">
               <NavItem>Browse</NavItem>
             </LinkContainer>
+            <LinkContainer to="/filterbydifficulty">
+              <NavItem>Filter By Difficulty</NavItem>
+            </LinkContainer>
             {isAuthorised &&
             <LinkContainer 
               to={{

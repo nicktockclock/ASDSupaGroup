@@ -13,6 +13,7 @@ import AccountManager from "./containers/AccountManager";
 import UpdateUser from "./containers/UpdateUser";
 import SearchName from "./containers/SearchName";
 import SearchIngredient from "./containers/searchingredient";
+import FilterByDifficulty from "./containers/FilterByDifficulty";
 
 export default function Routes() {
   return (
@@ -40,6 +41,9 @@ export default function Routes() {
       </Route>
       <Route exact path="/searchingredient">
         <SearchIngredient/>
+      </Route>
+      <Route exact path="/FilterByDifficulty">
+        <FilterByDifficulty/>
       </Route>
       <Route path="/updaterecipe" render={props => <UpdateRecipe {...props} className="UpdateRecipe" app={this}/>}/>
       <Route path="/accountmanagement/updateuser" render={props => <UpdateUser {...props}/>}/>

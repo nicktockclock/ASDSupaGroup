@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/RecipeApi.csproj": {}
+    "C:\\Users\\flabb\\Desktop\\UTS\\Spring 2020\\41026 Advanced Software Development\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj": {}
   },
   "projects": {
-    "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/RecipeApi.csproj": {
+    "C:\\Users\\flabb\\Desktop\\UTS\\Spring 2020\\41026 Advanced Software Development\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/RecipeApi.csproj",
+        "projectUniqueName": "C:\\Users\\flabb\\Desktop\\UTS\\Spring 2020\\41026 Advanced Software Development\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj",
         "projectName": "RecipeApi",
-        "projectPath": "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/RecipeApi.csproj",
-        "packagesPath": "/Users/nicktockclock/.nuget/packages/",
-        "outputPath": "/Users/nicktockclock/Documents/GitHub/ASDSupaGroup/RecipeApi/obj/",
+        "projectPath": "C:\\Users\\flabb\\Desktop\\UTS\\Spring 2020\\41026 Advanced Software Development\\ASDSupaGroup\\RecipeApi\\RecipeApi.csproj",
+        "packagesPath": "C:\\Users\\flabb\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\flabb\\Desktop\\UTS\\Spring 2020\\41026 Advanced Software Development\\ASDSupaGroup\\RecipeApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/Users/nicktockclock/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\flabb\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -79,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
