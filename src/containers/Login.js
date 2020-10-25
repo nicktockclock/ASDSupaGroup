@@ -63,12 +63,12 @@ class Login extends Component {
                         </Col>
                     </FormGroup>
                     {this.state.error != "" && <FormGroup >
-                        <Col smOffset={2} sm={10}>
+                        <Col smOffset={0} sm={0}>
                             <Alert>{JSON.stringify(this.state.error.message)}</Alert>
                         </Col>
                     </FormGroup>}
                     <FormGroup>
-                        <Col smOffset={2} sm={10}>
+                        <Col smOffset={0} sm={0}>
                             <Button type="submit" bsSize='large'>Sign in</Button>
                         </Col>
                     </FormGroup>
