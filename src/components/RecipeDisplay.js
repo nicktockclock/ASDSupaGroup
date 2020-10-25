@@ -7,16 +7,16 @@ import Axios from 'axios';
 export const RecipeCards = ({ recipes }) => (
   <div>
       {recipes.map(recipe =>
-            <div className="card" key={recipe.id}>
-                <a target="_blank" href={"/recipepage?id=" + recipe.id}>
-                    <p className="name">{recipe.recipeName}</p>
-                    <img src={recipe.url} width="300"/>
-                </a>
+        <div className="card" key={recipe.id}>
+            <a target="_blank" href={"/recipepage?id=" + recipe.id}>
+                <p className="name">{recipe.recipeName}</p>
+                <img src={recipe.url} width="300"/>
+            </a>
 
-                <center>
-                    <p className="desc">{recipe.difficulty} / {recipe.cookTime} / {recipe.calories}</p>
-                </center>
-            </div>
+            <center>
+                <p className="desc">{recipe.difficulty} / {recipe.cookTime} / {recipe.calories}</p>
+            </center>
+        </div>
       )}
   </div>
 );
