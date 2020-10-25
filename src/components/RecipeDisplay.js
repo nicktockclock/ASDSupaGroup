@@ -1,24 +1,22 @@
 import React from "react";
 import "./RecipeDisplay.css";
 
-import {getImage, getRandomRating, parseDuration, parseCalories, ratingChanged, shuffle} from "../containers/Utils.js";
-//https://stackoverflow.com/questions/44552557/update-specific-component-instance-in-react-js-based-on-an-id
+import {getImage, parsecookTime, parseCalories, shuffle} from "../containers/Utils.js";
 import Axios from 'axios';
 
 export const RecipeCards = ({ recipes }) => (
   <div>
       {recipes.map(recipe =>
+            <div className="card" key={recipe.id}>
+                <a target="_blank" href={"/recipepage?id=" + recipe.id}>
+                    <p className="name">{recipe.recipeName}</p>
+                    <img src={recipe.url} width="300"/>
+                </a>
 
-          <div className="card" key={recipe.id}>
-              <a target="_blank" href="{value}">
-                  <p className="name">{recipe.recipeName}</p>
-                  <img src={recipe.url} width="300"/>
-              </a>
-
-              <center>
-                  <p className="desc">{recipe.difficulty} / {recipe.duration} / {recipe.calories}</p>
-              </center>
-          </div>
+                <center>
+                    <p className="desc">{recipe.difficulty} / {recipe.cookTime} / {recipe.calories}</p>
+                </center>
+            </div>
       )}
   </div>
 );
@@ -27,7 +25,7 @@ export async function getRecipeMetadata(food) {
     var f = food;
     if (food) {
         f.url = await getImage(food.recipeName);
-        f.duration = parseDuration(food.cookTime);
+        f.cookTime = parsecookTime(food.cookTime);
         f.calories = parseCalories(food.calories);
     }  
     return f; 
@@ -54,7 +52,6 @@ export async function getSorted(options) {
 
     actuallySort(foods, sort);
 
-    console.log(foods);
     return foods;
 }
 
