@@ -1,17 +1,13 @@
 import React, { Component, useState } from 'react';
 import { Button, Form, FormGroup, FormControl, Col, Checkbox, ControlLabel } from 'react-bootstrap';
 import "./CreateRecipe.css";
-import Routes from "../Routes";
-import {RecipeCardsName, FetchRecipes} from "../components/RecipeDisplay";
-import axios from 'axios';
-import ViewTable from './view-table';
-import {Link, Redirect} from 'react-router-dom';
+import {RecipeCards, getRecipeMetadata, getSorted} from "../components/RecipeDisplay";
 
 class SearchName extends Component {
     constructor(props) {
         super(props);
         this.onChangeRecipeName = this.onChangeRecipeName.bind(this);
-        this.state = { recipeCollection: [], recipeFiltered: [],name: '' };
+        this.state = { recipeCollection: [], recipeFiltered: [], name: '' };
     }
 
     onChangeRecipeName(e) {
@@ -20,25 +16,35 @@ class SearchName extends Component {
             this.setState({recipeFiltered: this.state.recipeCollection});
         }
         else{
-            this.setState({ recipeFiltered: this.state.recipeCollection.filter(recipeCollection => recipeCollection.recipeName.toLowerCase().includes(e.target.value.toLowerCase())) });
+            console.log(this.state.recipeCollection);
+            this.setState({ recipeFiltered: this.state.recipeCollection.filter(r => r.recipeName.toLowerCase().includes(e.target.value.toLowerCase())) });
         }
     }
 
     onSubmit(e) {
         e.preventDefault()
+    }
 
+    async incrementalLoad() {
+        var r = [];
+            
+        var sortedRecipes = await getSorted({
+            sort:"alphabetical"
+        });
         
+        for (const f of sortedRecipes) {
+            var tmp = await getRecipeMetadata({
+                food: f
+            });
+            r.push(tmp);
+
+            this.setState({ recipeCollection: r });
+            this.setState({ recipeFiltered: r });
+        }
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/recipes')
-            .then(res => {
-                this.setState({ recipeCollection: res.data });
-                this.setState({ recipeFiltered: res.data });
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        this.incrementalLoad();
     }
 
 
@@ -64,7 +70,7 @@ class SearchName extends Component {
               <div className="popularRecipes">
                 <h1>Popular Recipes</h1> 
                 <div className = "all">
-                  <RecipeCardsName recipes={this.state.recipeFiltered}/>                
+                  <RecipeCards recipes={this.state.recipeFiltered}/>                
                 </div>
               </div>
             </div>

@@ -72,3 +72,37 @@ export function getRandomDuration() {
     let index = random(array.length - 1);
     return array[index];
 }
+
+export function parseDuration(value) {
+    if (!isNaN(value)) {
+        if (value < 120) {
+            return value + "mins";
+        } else {
+            return Math.round(value/60) + "hrs";
+        }
+    }
+    return value;
+}
+
+export function parseCalories(value) {
+    return (!isNaN(value)) ? value + " cal." : value;
+}
+
+export function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+}
