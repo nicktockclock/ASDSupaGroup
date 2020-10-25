@@ -2,7 +2,6 @@ using RecipeApi.Models;
 using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
-using System.Diagnostics;
 
 namespace RecipeApi.Services
 {
@@ -18,11 +17,15 @@ namespace RecipeApi.Services
             _recipes = database.GetCollection<Recipe>("Recipes");
         }
 
-        public List<Recipe> Get() =>
-            _recipes.Find(recipe => true).ToList();
+        public List<Recipe> Get(int skip = 0, int max = 100) {
+            return _recipes.Find(recipe => true).Skip(skip).Limit(max).ToList();
+        }
 
         public Recipe Get(string id) =>
             _recipes.Find<Recipe>(recipe => recipe.Id == id).FirstOrDefault();
+
+        public List<Recipe> GetMyRecipes(string owner) =>
+            _recipes.Find(recipe => recipe.owner == owner).ToList();
 
         public Recipe Create(Recipe recipe)
         {

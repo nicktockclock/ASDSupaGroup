@@ -27,6 +27,14 @@ div.desc {
     font-size: 20px;
 }
 
+.desc {
+    text-align: center;
+    color: black;
+    text-transform: capitalize;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 15px;
+}
+
 .center {
     display: flex;
     align-items: center;

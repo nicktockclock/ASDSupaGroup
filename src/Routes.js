@@ -13,6 +13,7 @@ import ListRecipes from "./containers/ListRecipes";
 import AccountManager from "./containers/AccountManager";
 import UpdateUser from "./containers/UpdateUser";
 import SearchName from "./containers/SearchName";
+import SearchIngredient from "./containers/searchingredient";
 
 export default function Routes() {
   return (
@@ -32,15 +33,8 @@ export default function Routes() {
       <Route exact path="/recipepage">
         <RecipePage/>
       </Route>
-      <Route exact path="/createrecipe">
-        <CreateRecipe/>
-      </Route>
-      <Route exact path="/myrecipes">
-        <MyRecipes/>
-      </Route>
-      <Route exact path="/updaterecipe">
-        <UpdateRecipe/>
-      </Route>
+      <Route path="/createrecipe" render={props => <CreateRecipe {...props} className="CreateRecipes" app={this}/>}/>
+      <Route path="/myrecipes" render={props => <MyRecipes {...props} className="MyRecipes" app={this}/>}/>
       <Route exact path="/listrecipes">
         <ListRecipes/>
       </Route>
@@ -50,8 +44,16 @@ export default function Routes() {
       <Route exact path="/searchname">
         <SearchName/>
       </Route>
+<<<<<<< HEAD
       <Route path="/myrecipes/updaterecipe" render={props => <UpdateRecipe {...props} className="MyRecipes" app={this}/>}/>
       <Route path={["/accountmanagement/updateuser/:userId", "/accountmanagement/updateuser"]} render={props => <UpdateUser {...props}/>}/>
+=======
+      <Route exact path="/searchingredient">
+        <SearchIngredient/>
+      </Route>
+      <Route path="/updaterecipe" render={props => <UpdateRecipe {...props} className="UpdateRecipe" app={this}/>}/>
+      <Route path="/accountmanagement/updateuser" render={props => <UpdateUser {...props}/>}/>
+>>>>>>> develop
     </Switch>
   );}
 

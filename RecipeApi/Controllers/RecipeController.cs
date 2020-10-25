@@ -2,7 +2,6 @@ using RecipeApi.Models;
 using RecipeApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace RecipeApi.Controllers
 {
@@ -18,8 +17,9 @@ namespace RecipeApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Recipe>> Get() =>
-            _recipeService.Get();
+        public ActionResult<List<Recipe>> Get(int skip = 0, int max = 100) =>
+            _recipeService.Get(skip:skip, max:max);
+
 
         [HttpGet("{id:length(24)}", Name = "GetRecipe")]
         public ActionResult<Recipe> Get(string id)
@@ -32,6 +32,13 @@ namespace RecipeApi.Controllers
             }
 
             return recipe;
+        }
+
+        [HttpGet("myrecipes")]
+        public ActionResult<List<Recipe>> GetMyRecipes(string owner)
+        {
+            
+            return _recipeService.GetMyRecipes(owner);
         }
 
         [HttpPost]

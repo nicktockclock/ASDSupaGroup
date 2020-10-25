@@ -18,7 +18,6 @@ class UpdateRecipe extends Component {
         this.onChangeRecipeCalories = this.onChangeRecipeCalories.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = { recipeCollection: [],
-            id:  this.props.location.state.id,
             name: '',
             description: '',
             instructions: '',
@@ -29,7 +28,8 @@ class UpdateRecipe extends Component {
             calories: 0,
             updated: false,
             caloriesError: false,
-            servingsError: false
+            servingsError: false,
+            authorised: false
         }   
     }
 
@@ -80,7 +80,7 @@ class UpdateRecipe extends Component {
         e.preventDefault()
 
         const recipeObject = {
-            id: this.state.id,
+            id: this.props.location.state.id,
             recipeName: this.state.name,
             description: this.state.description,
             instructions: this.state.instructions,
@@ -88,9 +88,10 @@ class UpdateRecipe extends Component {
             cookTime: this.state.cooktime,
             servings: parseInt(this.state.servings),
             difficulty: this.state.difficulty,
-            calories: parseInt(this.state.calories)
+            calories: parseInt(this.state.calories),
+            owner: this.state.recipeCollection.owner
         };
-        axios.put('http://localhost:5000/api/recipes/'+this.state.id, recipeObject)
+        axios.put('http://localhost:5000/api/recipes/'+this.props.location.state.id, recipeObject)
             .then((res) => {
                 console.log(res.data)
                 this.setState({updated: true});
@@ -100,7 +101,8 @@ class UpdateRecipe extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:5000/api/recipes/'+this.state.id)
+        if (typeof(this.props.location.state) !== 'undefined'){
+            axios.get('http://localhost:5000/api/recipes/'+this.props.location.state.id)
             .then(res => {
                 this.setState({ recipeCollection: res.data });
                 this.setState({ name: this.state.recipeCollection.recipeName });
@@ -116,11 +118,17 @@ class UpdateRecipe extends Component {
             .catch(function (error) {
                 console.log(error);
             })
+            this.setState({authorised: true});
+        }
+        
     }
 
     render() {
+        if (!this.state.authorised){
+            return(<div><p>You are not authorised to access this page.</p></div>);
+        }
         if (this.state.updated){
-            return <Redirect to = {{ pathname: "/myrecipes" }} />;
+            return <Redirect to = {{ pathname: "/myrecipes", state: {email: this.state.recipeCollection.owner}}} />;
         }
         else{
             const servingerror = this.state.servingsError;

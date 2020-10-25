@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import "./Home.css";
 import { Button } from "react-bootstrap";
-import {RecipeCards, FetchRecipes} from "../components/RecipeDisplay";
-import {getImage, getRandomRating, getRandomDifficulty, getRandomDuration, ratingChanged} from "./Utils.js";
-// import ReactStars from "react-rating-stars-component";
-
+import {RecipeCards, getRecipeMetadata, getSorted} from "../components/RecipeDisplay";
 
 //export default function Home() {
 class Home extends Component {
@@ -18,21 +15,19 @@ class Home extends Component {
   }
 
   async incrementalLoad() {
-      var didReturn = true;        
-      var r = [];
-      var i;
-      for (i = 1; didReturn; i++) {
-          var tmp = await FetchRecipes({
-              index: i,
-              sort:"popular",
-              max:12
-          });
+    var r = [];
+        
+    var sortedRecipes = await getSorted({
+        sort:"popular",
+        max:12
+    });
+    if (!sortedRecipes) return; //when no results
+    
+    for (const f of sortedRecipes) {
 
-          didReturn = (tmp != null);
-          if (didReturn) r.push(tmp);
-         
-          this.setState({recipes: r});
-      }
+        r.push(f);
+        this.setState({recipes: r});
+    }
   }
 
   async componentDidMount () {
@@ -47,7 +42,7 @@ class Home extends Component {
           <h2>Search by...</h2>
           <>
           <div>
-          <Button href="/#">Ingredient</Button> 
+          <Button href="/searchingredient">Ingredient</Button> 
           <Button href="/searchname">Recipe</Button>
           </div>
           </>
