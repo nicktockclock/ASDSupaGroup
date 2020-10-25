@@ -61,19 +61,7 @@ export function getRandomRating() {
     return Math.floor(Math.random() * 2) + 3 //between 3-5 stars
 }
 
-export function getRandomDifficulty() {
-    let array = ["Easy", "Medium", "Hard"];
-    let index = random(array.length - 1);
-    return array[index];
-}
-
-export function getRandomDuration() {
-    let array = ["30 mins", "45 mins", "60 mins", "90 mins", "120 mins"];
-    let index = random(array.length - 1);
-    return array[index];
-}
-
-export function parseDuration(value) {
+export function parsecookTime(value) {
     if (!isNaN(value)) {
         if (value < 120) {
             return value + "mins";

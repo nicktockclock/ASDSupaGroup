@@ -40,3 +40,12 @@ div.desc {
     align-items: center;
     justify-content: center;
 }
+
+.container {
+    justify-content: center;
+}
+
+.bottom {
+    position:relative;
+    bottom:0;
+}

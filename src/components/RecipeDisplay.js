@@ -1,41 +1,34 @@
 import React from "react";
 import "./RecipeDisplay.css";
 
-import {getImage, getRandomRating, parseDuration, parseCalories, ratingChanged, shuffle} from "../containers/Utils.js";
-//https://stackoverflow.com/questions/44552557/update-specific-component-instance-in-react-js-based-on-an-id
+import {getImage, parsecookTime, parseCalories, shuffle} from "../containers/Utils.js";
 import Axios from 'axios';
 
 export const RecipeCards = ({ recipes }) => (
   <div>
       {recipes.map(recipe =>
+        <div className="card" key={recipe.id}>
+            <a target="_blank" href={"/recipepage?id=" + recipe.id}>
+                <p className="name">{recipe.recipeName}</p>
+                <img src={recipe.url} width="300"/>
+            </a>
 
-          <div className="card" key={recipe.id}>
-              <a target="_blank" href="{value}">
-                  <p className="name">{recipe.recipeName}</p>
-                  <img src={recipe.url} width="300"/>
-              </a>
-
-              <center>
-                  <p className="desc">{recipe.difficulty} / {recipe.duration} / {recipe.calories}</p>
-              </center>
-          </div>
+            <center>
+                <p className="desc">{recipe.difficulty} / {recipe.cookTime} / {recipe.calories}</p>
+            </center>
+        </div>
       )}
   </div>
 );
 
-export async function getRecipeMetadata(options) {
-    var options = options || {};
-    var food = options.food || null;
-    
+export async function getRecipeMetadata(food) {    
+    var f = food;
     if (food) {
-        var f = food;
         f.url = await getImage(food.recipeName);
-        f.duration = parseDuration(food.cookTime);
+        f.cookTime = parsecookTime(food.cookTime);
         f.calories = parseCalories(food.calories);
-
-        return f;
     }  
-    return null; 
+    return f; 
 }
 
 export async function getSorted(options) {
@@ -44,7 +37,7 @@ export async function getSorted(options) {
     var max = options.max || 100;
     var skip = options.skip || 0;
 
-    console.log("SORT:" + sort);
+    console.log("getSorted sort,max,skip=" + options.sort + "," + options.max + "," + options.skip);
 
     var query = 'http://localhost:5000/api/Recipes?max=' + max + '&skip=' + skip;
 
@@ -80,7 +73,7 @@ export function actuallySort(foods, sort) {
         case "calories":
             return foods.sort((a,b) => SemiNumericSort(a.calories, b.calories));
         case "random":
-            return foods;//shuffle(foods);
+            return shuffle(foods);
     }
 }
 
