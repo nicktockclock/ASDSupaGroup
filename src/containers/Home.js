@@ -24,9 +24,8 @@ class Home extends Component {
     if (!sortedRecipes) return; //when no results
     
     for (const f of sortedRecipes) {
-
-        r.push(f);
-        this.setState({recipes: r});
+      r.push(await getRecipeMetadata(f));
+      this.setState({recipes: r});
     }
   }
 

@@ -34,8 +34,7 @@ class SearchName extends Component {
         if (!sortedRecipes) return; //when no results
 
         for (const f of sortedRecipes) {
-            
-            r.push(f);
+            r.push(await getRecipeMetadata(f));
 
             this.setState({ recipeCollection: r });
             this.setState({ recipeFiltered: r });
