@@ -20,7 +20,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha 'src/tests/*.js' --recursive --require esm",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,5 +37,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "esm": "^3.2.25",
+    "jest": "^26.6.1",
+    "mocha": "^8.2.0"
   }
 }
