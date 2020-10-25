@@ -51,11 +51,6 @@ class AccountManager extends Component {
             <Table>
                 <thead>
                     <tr>
-                        <th>Add a User: </th>
-                        <th><input type="text"/></th>
-                        <th><button onClick={() => this.props.addItem(this.state.inputText)}>Add</button></th>
-                    </tr>
-                    <tr>
                         <th>Email</th>
                         <th className='button-header'>Edit</th>
                         <th className='button-header'>Delete</th>

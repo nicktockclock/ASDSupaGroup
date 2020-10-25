@@ -32,13 +32,6 @@ function App() {
             <LinkContainer to="/recipepage">
               <NavItem>Recipe Page</NavItem>
             </LinkContainer>
-            {!isAuthorised ? (
-            <LinkContainer to="/login">
-              <NavItem>Login</NavItem>
-            </LinkContainer>
-            ) : (
-              <NavItem onClick={() => {logout(); history.push('/login');}}>Logout</NavItem>
-            )}
             {isAuthorised &&
             <LinkContainer 
               to={{
@@ -62,9 +55,18 @@ function App() {
               <NavItem>My Recipes</NavItem>
             </LinkContainer>
             }
-            <LinkContainer to="/accountmanagement">
+            {isAuthorised && 
+              <LinkContainer to="/accountmanagement">
               <NavItem>Account Management</NavItem>
             </LinkContainer>
+            }
+            {!isAuthorised ? (
+            <LinkContainer to="/login">
+              <NavItem>Login</NavItem>
+            </LinkContainer>
+            ) : (
+              <NavItem onClick={() => {logout(); history.push('/login');}}>Logout</NavItem>
+            )}
             {email && <NavItem disabled>{email}</NavItem>}
           </Nav>
         </Navbar.Collapse>

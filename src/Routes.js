@@ -44,16 +44,13 @@ export default function Routes() {
       <Route exact path="/searchname">
         <SearchName/>
       </Route>
-<<<<<<< HEAD
       <Route path="/myrecipes/updaterecipe" render={props => <UpdateRecipe {...props} className="MyRecipes" app={this}/>}/>
       <Route path={["/accountmanagement/updateuser/:userId", "/accountmanagement/updateuser"]} render={props => <UpdateUser {...props}/>}/>
-=======
       <Route exact path="/searchingredient">
         <SearchIngredient/>
       </Route>
       <Route path="/updaterecipe" render={props => <UpdateRecipe {...props} className="UpdateRecipe" app={this}/>}/>
       <Route path="/accountmanagement/updateuser" render={props => <UpdateUser {...props}/>}/>
->>>>>>> develop
     </Switch>
   );}
 
