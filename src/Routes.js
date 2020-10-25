@@ -26,9 +26,7 @@ export default function Routes() {
       <Route exact path="/login">
         <Login />
       </Route>
-      <Route exact path="/recipepage">
-        <RecipePage/>
-      </Route>
+      <Route path="/recipepage" render={props => <RecipePage {...props} className="RecipePage" app={this}/>}/>
       <Route path="/createrecipe" render={props => <CreateRecipe {...props} className="CreateRecipes" app={this}/>}/>
       <Route path="/myrecipes" render={props => <MyRecipes {...props} className="MyRecipes" app={this}/>}/>
       <Route exact path="/listrecipes">
