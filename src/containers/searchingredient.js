@@ -47,10 +47,8 @@ class SearchIngredients extends Component {
         });
         
         for (const f of sortedRecipes) {
-            var tmp = await getRecipeMetadata({
-                food: f
-            });
-            r.push(tmp);
+
+            r.push(f);
 
             this.setState({ recipeCollection: r });
             this.setState({ recipeFiltered: r });

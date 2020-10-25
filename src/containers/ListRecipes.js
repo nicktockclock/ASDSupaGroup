@@ -33,10 +33,8 @@ class ListRecipes extends Component {
         console.log(sortedRecipes);
 
         for (const f of sortedRecipes) {
-            var tmp = await getRecipeMetadata({
-                food: f
-            });
-            r.push(tmp);
+
+            r.push(f);
             this.setState( {recipes: r} );
         }
     }
