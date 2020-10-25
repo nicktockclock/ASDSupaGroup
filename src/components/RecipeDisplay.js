@@ -23,19 +23,14 @@ export const RecipeCards = ({ recipes }) => (
   </div>
 );
 
-export async function getRecipeMetadata(options) {
-    var options = options || {};
-    var food = options.food || null;
-    
+export async function getRecipeMetadata(food) {    
+    var f = food;
     if (food) {
-        var f = food;
         f.url = await getImage(food.recipeName);
         f.duration = parseDuration(food.cookTime);
         f.calories = parseCalories(food.calories);
-
-        return f;
     }  
-    return null; 
+    return f; 
 }
 
 export async function getSorted(options) {
@@ -59,6 +54,7 @@ export async function getSorted(options) {
 
     actuallySort(foods, sort);
 
+    console.log(foods);
     return foods;
 }
 
@@ -80,7 +76,7 @@ export function actuallySort(foods, sort) {
         case "calories":
             return foods.sort((a,b) => SemiNumericSort(a.calories, b.calories));
         case "random":
-            return foods;//shuffle(foods);
+            return shuffle(foods);
     }
 }
 
