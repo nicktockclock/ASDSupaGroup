@@ -14,7 +14,6 @@ class RecipePage extends Component {
 
   async componentDidMount() {
     const values = queryString.parse(this.props.location.search);
-    console.log(values.test);
     var requestedId = values.id;
 
     var res = "";
