@@ -4,7 +4,6 @@ import { Route, Switch } from "react-router-dom";
 import PrivateRoute from './PrivateRoute'
 import Home from "./containers/Home";
 import Login from "./containers/Login";
-import Browse from "./containers/Browse";
 import RecipePage from "./containers/RecipePage";
 import CreateRecipe from "./containers/CreateRecipe";
 import MyRecipes from "./containers/MyRecipes";
@@ -26,9 +25,6 @@ export default function Routes() {
       </Route>
       <Route exact path="/login">
         <Login />
-      </Route>
-      <Route exact path="/browse">
-        <Browse/>
       </Route>
       <Route exact path="/recipepage">
         <RecipePage/>
